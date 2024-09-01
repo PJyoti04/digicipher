@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react";
 import "./home.css";
 import Buttons from './Buttons';
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -9,7 +10,7 @@ const Home = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 8000); // Set the delay time as per your requirement
+    }, 4000); // Set the delay time as per your requirement
     return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
   }, []);
 
@@ -33,7 +34,7 @@ const Home = () => {
           <Buttons props={"Challenger"} />
           <Buttons props={"Classic"} />
           <Buttons props={"Leaderboard"} />
-          <Buttons props={"How To Play"} />
+          <Link to={'/rules'}><Buttons props={"How To Play"} /></Link>
         </div>
       </div>
     </div>
