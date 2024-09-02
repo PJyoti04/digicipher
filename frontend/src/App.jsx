@@ -1,9 +1,9 @@
 import React from 'react'
-import Home from './Components/Home'
+import Home from './Components/Pages/Home'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Rules from './Components/Rules';
-import Classic from './Components/Classic';
-import Challenger from './Components/Challenger';
+import Rules from './Components/Pages/Rules';
+import Classic from './Components/Pages/Classic';
+import Challenger from './Components/Pages/Challenger';
 
 
 const appRouter = createBrowserRouter([{

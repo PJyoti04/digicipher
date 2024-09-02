@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import "./home.css";
-import Buttons from './Buttons';
+import Buttons from '../Utilities/Buttons';
 import { Link } from "react-router-dom";
 
 const Home = () => {
