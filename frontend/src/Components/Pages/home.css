@@ -1,4 +1,7 @@
-
+.gradient-background {
+  background: linear-gradient(330deg, #d4a373, #a67b5b, #4c3b28);
+  z-index: -10;
+}
   @keyframes moveLeftToRight {
     0% {
       transform: translateX(-100%);

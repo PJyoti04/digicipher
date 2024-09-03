@@ -27,10 +27,10 @@ const Home = () => {
   }
   return (
     <div className="gradient-background h-screen flex flex-col items-center py-[8%] gap-10 relative overflow-hidden">
-      <div className="absolute -z-10 bg-slate-400 h-[25%] w-[105%] top-0 left-0 animate-moveLeftToRight"></div>
-      <div className="absolute -z-10 bg-slate-400 h-[25%] w-[105%] top-[25%] right-0 animate-moveRightToLeft"></div>
-      <div className="absolute -z-10 bg-slate-400 h-[25%] w-[105%] top-[50%] left-0 animate-moveLeftToRight"></div>
-      <div className="absolute -z-10 bg-slate-400 h-[25%] w-[105%] top-[75%] right-0 animate-moveRightToLeft"></div>
+      <div className="absolute -z-10 bg-[#d4a373] h-[25%] w-[105%] top-0 left-0 animate-moveLeftToRight"></div>
+      <div className="absolute -z-10 bg-[#a67b5b] h-[25%] w-[105%] top-[25%] right-0 animate-moveRightToLeft"></div>
+      <div className="absolute -z-10 bg-[#8c6e52] h-[25%] w-[105%] top-[50%] left-0 animate-moveLeftToRight"></div>
+      <div className="absolute -z-10 bg-[#c69c6d] h-[25%] w-[105%] top-[75%] right-0 animate-moveRightToLeft"></div>
       <div className="h-[50%] w-[90%] md:w-[60%] lg:w-[45%] rounded-xl py-6 flex flex-col gap-10">
         <div className="text-[32px] sm:text-[40px] md:text-[50px] flex font-bungee font-bold items-center justify-center">
           <span className="flex items-center h-10 w-50 text-yellow-400 bg-clip-text">
