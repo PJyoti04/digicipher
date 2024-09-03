@@ -1,6 +1,6 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "./home.css";
-import Buttons from '../Utilities/Buttons';
+import Buttons from "../Utilities/Buttons";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -17,24 +17,38 @@ const Home = () => {
   if (isLoading) {
     return (
       <div className="gradient-background  h-screen flex justify-center items-center">
-        <img src={'./safe-box-wo-bg.gif'} alt="Loading..." className="h-[150px] w-[150px] bg-transparent" />
+        <img
+          src={"./safe-box-wo-bg.gif"}
+          alt="Loading..."
+          className="h-[150px] w-[150px] bg-transparent"
+        />
       </div>
     );
   }
   return (
-    <div className="gradient-background h-screen flex flex-col items-center py-[8%] gap-10">
+    <div className="gradient-background h-screen flex flex-col items-center py-[8%] gap-10 relative overflow-hidden">
+      <div className="absolute -z-10 bg-slate-400 h-[25%] w-[105%] top-0 left-0 animate-moveLeftToRight"></div>
+      <div className="absolute -z-10 bg-slate-400 h-[25%] w-[105%] top-[25%] right-0 animate-moveRightToLeft"></div>
+      <div className="absolute -z-10 bg-slate-400 h-[25%] w-[105%] top-[50%] left-0 animate-moveLeftToRight"></div>
+      <div className="absolute -z-10 bg-slate-400 h-[25%] w-[105%] top-[75%] right-0 animate-moveRightToLeft"></div>
       <div className="h-[50%] w-[90%] md:w-[60%] lg:w-[45%] rounded-xl py-6 flex flex-col gap-10">
         <div className="text-[32px] sm:text-[40px] md:text-[50px] flex font-bungee font-bold items-center justify-center">
-          <span className="flex items-center h-10 w-50 text-orange-500 bg-clip-text">
-            <img src={'./icon-no-bg.png'} alt="icon" className="h-[45px] w-[45px]" />
-            PEN THE VAULT
+          <span className="flex items-center h-10 w-50 text-yellow-400 bg-clip-text">
+            <img
+              src={"./icon-no-bg.png"}
+              alt="icon"
+              className="h-[45px] w-[45px]"
+            />
+            OPEN THE VAULT
           </span>
         </div>
         <div className="modes font-audiowide font-[400] flex justify-center items-center flex-col gap-6">
           <Buttons props={"Challenger"} />
           <Buttons props={"Classic"} />
           <Buttons props={"Leaderboard"} />
-          <Link to={'/rules'}><Buttons props={"How To Play"} /></Link>
+          <Link to={"/rules"}>
+            <Buttons props={"How To Play"} />
+          </Link>
         </div>
       </div>
     </div>

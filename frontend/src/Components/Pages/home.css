@@ -1,19 +1,34 @@
 
-  .gradient-background {
-    background: linear-gradient(300deg,#A55EC1 ,#614875 ,#E3A7FF );
-    background-size: 180% 180%;
-    animation: gradient-animation 12s ease infinite;
-  }
-  
-  @keyframes gradient-animation {
+  @keyframes moveLeftToRight {
     0% {
-      background-position: 0% 50%;
+      transform: translateX(-100%);
     }
     50% {
-      background-position: 100% 50%;
+      transform: translateX(0);
     }
     100% {
-      background-position: 0% 50%;
+      transform: translateX(100%);
     }
   }
+  
+  @keyframes moveRightToLeft {
+    0% {
+      transform: translateX(100%);
+    }
+    50% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  .animate-moveLeftToRight {
+    animation: moveLeftToRight 8s ease-in-out infinite;
+  }
+  
+  .animate-moveRightToLeft {
+    animation: moveRightToLeft 8s ease-in-out infinite;
+  }
+  
   
