@@ -9,7 +9,7 @@ const Rules = () => {
       <div className="flex justify-center mt-4 relative w-[240px]">
         {/* Animated Highlight Bar */}
         <div
-          className={`h-10 w-[120px] bg-gray-600 absolute top-0 transition-all duration-300 ease-in-out ${
+          className={`h-10 w-[120px] bg-gray-600 absolute transition-all duration-300 ease-in-out ${
             clicked === "Classic" ? "left-0" : "left-[120px]"
           }`}
         ></div>

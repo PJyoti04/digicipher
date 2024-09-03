@@ -1,0 +1,37 @@
+.gradient-background {
+  background: linear-gradient(330deg, #d4a373, #a67b5b, #4c3b28);
+  z-index: -10;
+}
+  @keyframes moveLeftToRight {
+    0% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  
+  @keyframes moveRightToLeft {
+    0% {
+      transform: translateX(100%);
+    }
+    50% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  .animate-moveLeftToRight {
+    animation: moveLeftToRight 8s ease-in-out infinite;
+  }
+  
+  .animate-moveRightToLeft {
+    animation: moveRightToLeft 8s ease-in-out infinite;
+  }
+  
+  
