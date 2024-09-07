@@ -39,11 +39,17 @@ const Home = () => {
           </span>
         </div>
         <div className="modes font-audiowide font-[400] flex justify-center items-center flex-col gap-6">
-          <Buttons props={"Challenger"} />
-          <Buttons props={"Classic"} />
-          <Buttons props={"Leaderboard"} />
+          <Link to={"/challenger"}>
+            <Buttons label={"Challenger"} />
+          </Link>
+          <Link to={"/classic"}>
+            <Buttons label={"Classic"} />
+          </Link>
+          <Link to={"/leaderboard"}>
+            <Buttons label={"Leaderboard"} />
+          </Link>
           <Link to={"/rules"}>
-            <Buttons props={"How To Play"} />
+            <Buttons label={"How To Play"} />
           </Link>
         </div>
       </div>
