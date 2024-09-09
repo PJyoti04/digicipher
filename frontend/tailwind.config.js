@@ -16,6 +16,8 @@ export default {
       fontFamily: {
         audiowide: ["Audiowide", "sans-serif"],
         bungee: ["Bungee", "sans-serif"],
+        orbitron: ["Orbitron", "sans-serif"],
+        tech: ["Share Tech Mono", "monospace"]  
       },
     },
   },

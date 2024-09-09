@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Rules from './Components/Pages/Rules';
 import Classic from './Components/Pages/Classic';
 import Challenger from './Components/Pages/Challenger';
+import Leaderboard from './Components/Pages/Leaderboard';
 
 
 const appRouter = createBrowserRouter([{
@@ -18,6 +19,9 @@ const appRouter = createBrowserRouter([{
 },{
   path: "/challenger",
   element: <Challenger />
+},{
+  path: "/leaderboard",
+  element: <Leaderboard />
 }])
 const App = () => {
 

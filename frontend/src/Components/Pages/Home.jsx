@@ -27,10 +27,6 @@ const Home = () => {
   }
   return (
     <div className="gradient-background h-screen flex flex-col items-center py-[8%] gap-10 relative overflow-hidden">
-      <div className="absolute -z-10 bg-[#d4a373] h-[25%] w-[105%] top-0 left-0 animate-moveLeftToRight"></div>
-      <div className="absolute -z-10 bg-[#a67b5b] h-[25%] w-[105%] top-[25%] right-0 animate-moveRightToLeft"></div>
-      <div className="absolute -z-10 bg-[#8c6e52] h-[25%] w-[105%] top-[50%] left-0 animate-moveLeftToRight"></div>
-      <div className="absolute -z-10 bg-[#c69c6d] h-[25%] w-[105%] top-[75%] right-0 animate-moveRightToLeft"></div>
       <div className="h-[50%] w-[90%] md:w-[60%] lg:w-[45%] rounded-xl py-6 flex flex-col gap-10">
         <div className="text-[32px] sm:text-[40px] md:text-[50px] flex font-bungee font-bold items-center justify-center">
           <span className="flex items-center h-10 w-50 text-yellow-400 bg-clip-text">
@@ -43,11 +39,17 @@ const Home = () => {
           </span>
         </div>
         <div className="modes font-audiowide font-[400] flex justify-center items-center flex-col gap-6">
-          <Buttons props={"Challenger"} />
-          <Buttons props={"Classic"} />
-          <Buttons props={"Leaderboard"} />
+          <Link to={"/challenger"}>
+            <Buttons label={"Challenger"} />
+          </Link>
+          <Link to={"/classic"}>
+            <Buttons label={"Classic"} />
+          </Link>
+          <Link to={"/leaderboard"}>
+            <Buttons label={"Leaderboard"} />
+          </Link>
           <Link to={"/rules"}>
-            <Buttons props={"How To Play"} />
+            <Buttons label={"How To Play"} />
           </Link>
         </div>
       </div>
