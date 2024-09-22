@@ -3,21 +3,12 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      keyframes: {
-        shine: {
-          "0%": { "background-position": "0" },
-          "40%": { "background-position": "400px" },
-          "100%": { "background-position": "800px" },
-        },
-      },
-      animation: {
-        shine: "shine 5s infinite linear", // Increase duration for smoother animation
-      },
       fontFamily: {
-        audiowide: ["Audiowide", "sans-serif"],
-        bungee: ["Bungee", "sans-serif"],
-        orbitron: ["Orbitron", "sans-serif"],
-        tech: ["Share Tech Mono", "monospace"]  
+        orbitron: ['Orbitron', 'sans-serif'],
+        exo2: ['Exo 2', 'sans-serif'],
+        pressStart: ['"Press Start 2P"', 'cursive'],
+        rajdhani: ['Rajdhani', 'sans-serif'],
+        audiowide: ['Audiowide', 'cursive'],
       },
     },
   },
