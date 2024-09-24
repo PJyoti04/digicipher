@@ -1,57 +1,30 @@
-import React, { useState, useEffect } from "react";
-import "./home.css";
-import Buttons from "../Utilities/Buttons";
+import React from "react";
+import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Simulate loading time with useEffect
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 4000); // Set the delay time as per your requirement
-    return () => clearTimeout(timer); // Cleanup the timer if the component unmounts
-  }, []);
-
-  if (isLoading) {
-    return (
-      <div className="gradient-background  h-screen flex justify-center items-center">
-        <img
-          src={"./safe-box-wo-bg.gif"}
-          alt="Loading..."
-          className="h-[150px] w-[150px] bg-transparent"
-        />
-      </div>
-    );
-  }
   return (
-    <div className="gradient-background h-screen flex flex-col items-center py-[8%] gap-10 relative overflow-hidden">
-      <div className="h-[50%] w-[90%] md:w-[60%] lg:w-[45%] rounded-xl py-6 flex flex-col gap-10">
-        <div className="text-[32px] sm:text-[40px] md:text-[50px] flex font-bungee font-bold items-center justify-center">
-          <span className="flex items-center h-10 w-50 text-yellow-400 bg-clip-text">
-            <img
-              src={"./icon-no-bg.png"}
-              alt="icon"
-              className="h-[45px] w-[45px]"
-            />
-            OPEN THE VAULT
-          </span>
-        </div>
-        <div className="modes font-audiowide font-[400] flex justify-center items-center flex-col gap-6">
-          <Link to={"/challenger"}>
-            <Buttons label={"Challenger"} />
-          </Link>
-          <Link to={"/classic"}>
-            <Buttons label={"Classic"} />
-          </Link>
-          <Link to={"/leaderboard"}>
-            <Buttons label={"Leaderboard"} />
-          </Link>
-          <Link to={"/rules"}>
-            <Buttons label={"How To Play"} />
-          </Link>
-        </div>
+    <div
+      className="h-[100vh]"
+      style={{
+        backgroundImage:
+          "linear-gradient(to right top, #b3e0e8, #a4c8d6, #95b1c4, #88a1b1, #7a8b9e, #748a8d, #708c8b, #6c8e88, #66909c, #7aa2ab, #8fb3ba, #a6c4c9)",
+      }}
+    >
+      <Navbar />
+      <div className="h-[70%] w-full flex flex-col items-center justify-center gap-5">
+        <button className="w-[50%] h-max p-2 bg-blue-300 font-audiowide cursor-pointer">
+          <Link to={"/classic"}>CLASSIC</Link>
+        </button>
+        <button className="w-[50%] h-max p-2 bg-blue-300 font-audiowide cursor-pointer">
+          <Link to={"/challenger"}>CHALLANGER</Link>
+        </button>
+        <button className="w-[50%] h-max p-2 bg-blue-300 font-audiowide cursor-pointer">
+          <Link to={"/leaderboard"}>LEADERBOARD</Link>
+        </button>
+        <button className="w-[50%] h-max p-2 bg-blue-300 font-audiowide cursor-pointer">
+          <Link to={"rules"}>INSTRUCTIONS</Link>
+        </button>
       </div>
     </div>
   );
