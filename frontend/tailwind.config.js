@@ -9,6 +9,7 @@ export default {
         pressStart: ['"Press Start 2P"', 'cursive'],
         rajdhani: ['Rajdhani', 'sans-serif'],
         audiowide: ['Audiowide', 'cursive'],
+        fira: ['Fira Code', 'monospace']
       },
     },
   },
