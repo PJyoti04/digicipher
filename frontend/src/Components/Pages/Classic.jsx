@@ -1,33 +1,93 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Classic = () => {
-  const [input, setInput] = useState([[], [], [], [], []]); // 5 rows of inputs
-  const [currentRow, setCurrentRow] = useState(0); // To track the current row
-  const [currentInput, setCurrentInput] = useState([]); // Current row input
+  const [input, setInput] = useState([[], [], [], [], []]);
+  const [currentRow, setCurrentRow] = useState(0);
+  const [currentInput, setCurrentInput] = useState([]);
+  const [randomNum, setRandomNum] = useState("");
+  const [isMatch, setIsMatch] = useState(false);
+  const [playAgain, setPlayAgain] = useState(false);
+  const [win, setWin] = useState(false);
+  const [isGuessed, setIsGuessed] = useState(false);
+  const [instructions, setInstructions] = useState(false);
 
   const handleKeyClick = (key) => {
     if (key === "Delete") {
-      setCurrentInput((prev) => prev.slice(0, -1)); // Remove the last input
+      setCurrentInput((prev) => prev.slice(0, -1));
     } else if (key === "Enter") {
       if (currentInput.length === 4) {
         let newInput = [...input];
-        newInput[currentRow] = currentInput; // Save the current row input
+        newInput[currentRow] = currentInput;
         setInput(newInput);
-        setCurrentInput([]); // Clear the input for the next row
-        if (currentRow < 4) {
-          setCurrentRow(currentRow + 1); // Move to the next row
+        setCurrentInput([]);
+
+        if (currentInput.join("") === randomNum) {
+          setIsMatch(true);
+          setIsGuessed(true);
+          setWin(true);
+          setPlayAgain(true);
+        } else {
+          setIsMatch(false);
+          if (currentRow < 4) {
+            setCurrentRow(currentRow + 1);
+          } else {
+            setPlayAgain(true);
+            setIsGuessed(true);
+            setWin(false);
+          }
         }
       } else {
         alert("Please enter 4 digits before pressing Enter.");
       }
     } else if (currentInput.length < 4) {
-      setCurrentInput((prev) => [...prev, key]); // Add the number to the input
+      setCurrentInput((prev) => [...prev, key]);
     }
+  };
+
+  const resetGame = () => {
+    setInput([[], [], [], [], []]);
+    setCurrentRow(0);
+    setCurrentInput([]);
+    setIsMatch(false);
+    setPlayAgain(false);
+    setWin(false);
+    setIsGuessed(false);
+    setRandomNum(generateNumber());
+  };
+
+  useEffect(() => {
+    setRandomNum(generateNumber());
+  }, []);
+
+  const generateNumber = () => {
+    let digits = [];
+    while (digits.length < 4) {
+      let randomDigit = Math.floor(Math.random() * 10);
+      if (!digits.includes(randomDigit)) {
+        digits.push(randomDigit);
+      }
+    }
+    return digits.join("");
+  };
+
+  const getBgColor = (digit, index) => {
+    if (randomNum[index] === digit) {
+      return "bg-green-300";
+    } else if (randomNum.includes(digit)) {
+      return "bg-yellow-300";
+    } else {
+      return "bg-red-300";
+    }
+  };
+
+  const showInstructions = () => {
+    // Implementation for showing instructions
+    setInstructions(!instructions);
   };
 
   return (
     <div
-      className="h-[100vh] w-full flex gap-6 flex-col items-center"
+      className="h-[100vh] w-full flex gap-5 flex-col items-center"
       style={{
         backgroundImage:
           "linear-gradient(to right top, #b3e0e8, #a4c8d6, #95b1c4, #88a1b1, #7a8b9e, #748a8d, #708c8b, #6c8e88, #66909c, #7aa2ab, #8fb3ba, #a6c4c9)",
@@ -40,25 +100,35 @@ const Classic = () => {
               src="logo.jpeg"
               alt="DigiCipher logo"
               className="h-12 w-12 rounded-full"
-            />{" "}
-            {/* Added alt text and used rounded-full */}
-            <p className="text-[22px] font-bold  font-audiowide">DigiCipher</p>
+            />
+            <p className="text-[22px] font-bold font-audiowide">DigiCipher</p>
           </div>
-          <img
-            src="https://avatar.iran.liara.run/public/3"
-            alt="User avatar"
-            className="h-[49px] w-auto"
-          />
+          <div className="flex gap-3 justify-center items-center">
+            <h1
+              className="bg-white h-10 w-10 text-3xl flex justify-center items-center rounded-full"
+              onClick={showInstructions}
+            >
+              i
+            </h1>
+            <img
+              src="https://avatar.iran.liara.run/public/3"
+              alt="User avatar"
+              className="h-[49px] w-auto"
+            />
+          </div>
         </nav>
       </div>
 
       {/* Input */}
-      <div className="h-[44%] w-[85%]">
-        <div className=" w-full h-full grid grid-cols-4 grid-rows-5 gap-2">
+      <div className="h-[40%] w-[75%]">
+        <div className="w-full h-full grid grid-cols-4 grid-rows-5 gap-2">
           {input.flat().map((digit, index) => (
             <div
               key={index}
-              className="h-full w-full bg-red-300 font-audiowide rounded-xl flex items-center justify-center text-4xl"
+              className={`h-full w-full font-audiowide rounded-xl flex items-center justify-center text-4xl ${getBgColor(
+                digit,
+                index % 4
+              )}`}
             >
               {digit}
             </div>
@@ -78,6 +148,42 @@ const Classic = () => {
             ></div>
           ))}
         </div>
+      </div>
+
+      {/* Random Number */}
+      <div className="h-[10%] w-[80%] flex gap-2">
+        {randomNum && (
+          <>
+            {isGuessed ? (
+              randomNum
+                .toString()
+                .split("")
+                .map((ele, idx) => (
+                  <div
+                    className="bg-pink-200 h-[100%] w-[23%] rounded-2xl flex justify-center items-center text-5xl font-orbitron"
+                    key={idx}
+                  >
+                    {ele}
+                  </div>
+                ))
+            ) : (
+              <>
+                <div className="bg-pink-200 h-[100%] w-[23%] rounded-2xl flex justify-center items-center text-5xl font-orbitron">
+                  *
+                </div>
+                <div className="bg-pink-200 h-[100%] w-[23%] rounded-2xl flex justify-center items-center text-5xl font-orbitron">
+                  *
+                </div>
+                <div className="bg-pink-200 h-[100%] w-[23%] rounded-2xl flex justify-center items-center text-5xl font-orbitron">
+                  *
+                </div>
+                <div className="bg-pink-200 h-[100%] w-[23%] rounded-2xl flex justify-center items-center text-5xl font-orbitron">
+                  *
+                </div>
+              </>
+            )}
+          </>
+        )}
       </div>
 
       {/* Keyboard */}
@@ -107,6 +213,46 @@ const Classic = () => {
           ))}
         </div>
       </div>
+
+      {/* Play Again */}
+      {playAgain && (
+        <div className="h-[100vh] w-[100%] absolute gap-4 flex-col font-pressStart bg-white bg-opacity-20 backdrop-blur-lg flex justify-center items-center">
+          <h1 className="text-7xl">
+            {win ? (
+              "You Won"
+            ) : (
+              <div className="text-4xl font-pressStart text-center">
+                Correct Number is {randomNum}
+              </div>
+            )}
+          </h1>
+
+          <button
+            className="bg-blue-500 text-white font-pressStart h-[10%] w-[60%] text-3xl rounded-lg"
+            onClick={resetGame}
+          >
+            Play Again
+          </button>
+        </div>
+      )}
+
+      {/* Instructions */}
+      {instructions && (
+        <div className="absolute h-[30vh] w-[80%] bg-white rounded-3xl px-4 py-4 bg-opacity-20 backdrop-blur-2xl top-20">
+          <div className="text-2xl">
+            <span className="h-10 w-10 bg-yellow-300 inline-block border-2 border-black"></span>{" "}
+            Digit is in the number
+          </div>
+          <div className="text-2xl mt-2">
+            <span className="h-10 w-10 bg-green-300 inline-block border-2 border-black"></span>{" "}
+            Digit is in the correct position
+          </div>
+          <div className="text-2xl mt-2">
+            <span className="h-10 w-10 bg-red-300 inline-block border-2 border-black"></span>{" "}
+            Digit is not in the number
+          </div>
+        </div>
+      )}
     </div>
   );
 };
