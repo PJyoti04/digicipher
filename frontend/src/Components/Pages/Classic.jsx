@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 const Classic = () => {
-  const [input, setInput] = useState([[], [], [], [], []]);
+  const [input, setInput] = useState([[], [], [], []]);
   const [currentRow, setCurrentRow] = useState(0);
   const [currentInput, setCurrentInput] = useState([]);
   const [randomNum, setRandomNum] = useState("");
@@ -28,7 +28,7 @@ const Classic = () => {
           setPlayAgain(true);
         } else {
           setIsMatch(false);
-          if (currentRow < 4) {
+          if (currentRow < 3) {
             setCurrentRow(currentRow + 1);
           } else {
             setPlayAgain(true);
@@ -45,7 +45,7 @@ const Classic = () => {
   };
 
   const resetGame = () => {
-    setInput([[], [], [], [], []]);
+    setInput([[], [], [], []]);
     setCurrentRow(0);
     setCurrentInput([]);
     setIsMatch(false);
@@ -120,14 +120,16 @@ const Classic = () => {
       </div>
 
       {/* Input */}
-      <div className="h-[40%] w-[75%]">
-        <div className="w-full h-full grid grid-cols-4 grid-rows-5 gap-2">
+      <div className="h-[33%] w-[75%]">
+        <div className="w-full h-full grid grid-cols-4 grid-rows-4 gap-2">
+          {" "}
+          {/* 4 rows */}
           {input.flat().map((digit, index) => (
             <div
               key={index}
               className={`h-full w-full font-audiowide rounded-xl flex items-center justify-center text-4xl ${getBgColor(
                 digit,
-                index % 4
+                index % 3
               )}`}
             >
               {digit}
@@ -141,7 +143,7 @@ const Classic = () => {
               {digit}
             </div>
           ))}
-          {Array.from({ length: 20 - input.flat().length }).map((_, index) => (
+          {Array.from({ length: 16 - input.flat().length }).map((_, index) => (
             <div
               key={`empty-${index}`}
               className="h-full w-full bg-red-300 font-audiowide rounded-2xl flex items-center justify-center text-4xl"
