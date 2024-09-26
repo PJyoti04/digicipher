@@ -81,7 +81,6 @@ const Classic = () => {
   };
 
   const showInstructions = () => {
-    // Implementation for showing instructions
     setInstructions(!instructions);
   };
 
@@ -122,14 +121,12 @@ const Classic = () => {
       {/* Input */}
       <div className="h-[33%] w-[75%]">
         <div className="w-full h-full grid grid-cols-4 grid-rows-4 gap-2">
-          {" "}
-          {/* 4 rows */}
           {input.flat().map((digit, index) => (
             <div
               key={index}
               className={`h-full w-full font-audiowide rounded-xl flex items-center justify-center text-4xl ${getBgColor(
                 digit,
-                index % 3
+                index % 4
               )}`}
             >
               {digit}
@@ -153,39 +150,18 @@ const Classic = () => {
       </div>
 
       {/* Random Number */}
-      <div className="h-[10%] w-[80%] flex gap-2">
-        {randomNum && (
-          <>
-            {isGuessed ? (
-              randomNum
-                .toString()
-                .split("")
-                .map((ele, idx) => (
-                  <div
-                    className="bg-pink-200 h-[100%] w-[23%] rounded-2xl flex justify-center items-center text-5xl font-orbitron"
-                    key={idx}
-                  >
-                    {ele}
-                  </div>
-                ))
-            ) : (
-              <>
-                <div className="bg-pink-200 h-[100%] w-[23%] rounded-2xl flex justify-center items-center text-5xl font-orbitron">
-                  *
-                </div>
-                <div className="bg-pink-200 h-[100%] w-[23%] rounded-2xl flex justify-center items-center text-5xl font-orbitron">
-                  *
-                </div>
-                <div className="bg-pink-200 h-[100%] w-[23%] rounded-2xl flex justify-center items-center text-5xl font-orbitron">
-                  *
-                </div>
-                <div className="bg-pink-200 h-[100%] w-[23%] rounded-2xl flex justify-center items-center text-5xl font-orbitron">
-                  *
-                </div>
-              </>
-            )}
-          </>
-        )}
+      <div className="h-[10vh] w-[80vw] flex gap-2">
+        {randomNum
+          .toString()
+          .split("")
+          .map((ele, idx) => (
+            <div
+              className="bg-pink-200 h-full w-[23%] rounded-2xl flex justify-center items-center text-5xl font-orbitron"
+              key={idx}
+            >
+              {ele}
+            </div>
+          ))}
       </div>
 
       {/* Keyboard */}
@@ -230,29 +206,11 @@ const Classic = () => {
           </h1>
 
           <button
-            className="bg-blue-500 text-white font-pressStart h-[10%] w-[60%] text-3xl rounded-lg"
+            className="bg-blue-500 text-white font-pressStart h-[12vh] w-[40%] text-2xl rounded-2xl"
             onClick={resetGame}
           >
             Play Again
           </button>
-        </div>
-      )}
-
-      {/* Instructions */}
-      {instructions && (
-        <div className="absolute h-[30vh] w-[80%] bg-white rounded-3xl px-4 py-4 bg-opacity-20 backdrop-blur-2xl top-20">
-          <div className="text-2xl">
-            <span className="h-10 w-10 bg-yellow-300 inline-block border-2 border-black"></span>{" "}
-            Digit is in the number
-          </div>
-          <div className="text-2xl mt-2">
-            <span className="h-10 w-10 bg-green-300 inline-block border-2 border-black"></span>{" "}
-            Digit is in the correct position
-          </div>
-          <div className="text-2xl mt-2">
-            <span className="h-10 w-10 bg-red-300 inline-block border-2 border-black"></span>{" "}
-            Digit is not in the number
-          </div>
         </div>
       )}
     </div>
