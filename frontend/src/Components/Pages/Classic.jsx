@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 const Classic = () => {
   const [input, setInput] = useState([[], [], [], []]);
@@ -10,6 +12,33 @@ const Classic = () => {
   const [win, setWin] = useState(false);
   const [isGuessed, setIsGuessed] = useState(false);
   const [instructions, setInstructions] = useState(false);
+
+  const gridRefs = useRef([]);
+  const numRefs = useRef([]);
+
+  const timeline = gsap.timeline();
+
+  useGSAP(() => {
+    // Animate the grid items
+    timeline.from(gridRefs.current, {
+      scale: 0,
+      duration: 0.2,
+      stagger: 0.08,
+      opacity: 0,
+      ease: "power1.out",
+    });
+  }, []);
+
+  useGSAP(() => {
+    // Animate the keyboard keys, including Enter and Delete
+    timeline.from(numRefs.current, {
+      y: 100,
+      duration: 0.2,
+      stagger: 0.05,
+      opacity: 0,
+      ease: "power1.out",
+    });
+  }, []);
 
   const handleKeyClick = (key) => {
     if (key === "Delete") {
@@ -57,6 +86,7 @@ const Classic = () => {
 
   useEffect(() => {
     setRandomNum(generateNumber());
+    console.log(randomNum);
   }, []);
 
   const generateNumber = () => {
@@ -118,12 +148,12 @@ const Classic = () => {
         </nav>
       </div>
 
-      {/* Input */}
-      <div className="h-[33%] w-[75%]">
+      <div className="h-[35%] w-[75%]">
         <div className="w-full h-full grid grid-cols-4 grid-rows-4 gap-2">
           {input.flat().map((digit, index) => (
             <div
               key={index}
+              ref={(el) => (gridRefs.current[index] = el)} // Attach each box to refs array
               className={`h-full w-full font-audiowide rounded-xl flex items-center justify-center text-4xl ${getBgColor(
                 digit,
                 index % 4
@@ -132,36 +162,29 @@ const Classic = () => {
               {digit}
             </div>
           ))}
+
           {currentInput.map((digit, index) => (
             <div
-              key={index}
+              key={index + input.flat().length}
+              ref={(el) => (gridRefs.current[input.flat().length + index] = el)}
               className="h-full w-full bg-red-300 font-audiowide rounded-2xl flex items-center justify-center text-4xl"
             >
               {digit}
             </div>
           ))}
+
           {Array.from({ length: 16 - input.flat().length }).map((_, index) => (
             <div
               key={`empty-${index}`}
+              ref={(el) =>
+                (gridRefs.current[
+                  input.flat().length + currentInput.length + index
+                ] = el)
+              }
               className="h-full w-full bg-red-300 font-audiowide rounded-2xl flex items-center justify-center text-4xl"
             ></div>
           ))}
         </div>
-      </div>
-
-      {/* Random Number */}
-      <div className="h-[10vh] w-[80vw] flex gap-2">
-        {randomNum
-          .toString()
-          .split("")
-          .map((ele, idx) => (
-            <div
-              className="bg-pink-200 h-full w-[23%] rounded-2xl flex justify-center items-center text-5xl font-orbitron"
-              key={idx}
-            >
-              {ele}
-            </div>
-          ))}
       </div>
 
       {/* Keyboard */}
@@ -180,8 +203,9 @@ const Classic = () => {
             "0",
             "Delete",
             "Enter",
-          ].map((key) => (
+          ].map((key, index) => (
             <button
+              ref={(el) => (numRefs.current[index] = el)} // Corrected reference to use index
               key={key}
               className="h-full w-full bg-black text-green-400 flex justify-center items-center text-2xl font-orbitron rounded-2xl"
               onClick={() => handleKeyClick(key)}
@@ -211,6 +235,22 @@ const Classic = () => {
           >
             Play Again
           </button>
+        </div>
+      )}
+
+      {/* Instructions */}
+      {instructions && (
+        <div className="absolute z-50 top-[12vh] right-[5vw] flex flex-col gap-3 p-5 rounded-lg shadow-2xl border-2 border-black bg-white bg-opacity-30 backdrop-blur-xl">
+          <h1 className="font-bold font-audiowide text-[23px]">Instructions</h1>
+          <p className="font-bold font-orbitron text-sm text-black">
+            1. Guess the 4 digit code.
+          </p>
+          <p className="font-bold font-orbitron text-sm text-black">
+            2. Use the numbers to guess.
+          </p>
+          <p className="font-bold font-orbitron text-sm text-black">
+            3. Press 'Del.' to delete and 'Ent.' to confirm your guess.
+          </p>
         </div>
       )}
     </div>
