@@ -13,30 +13,20 @@ const Classic = () => {
   const [isGuessed, setIsGuessed] = useState(false);
   const [instructions, setInstructions] = useState(false);
 
-  const gridRefs = useRef([]);
-  const numRefs = useRef([]);
+  // const gridRefs = useRef();
+  // const numRefs = useRef();
+  const fullPage = useRef();
+  const insref = useRef();
 
-  const timeline = gsap.timeline();
-
-  useGSAP(() => {
-    // Animate the grid items
-    timeline.from(gridRefs.current, {
-      scale: 0,
-      duration: 0.2,
-      stagger: 0.08,
-      opacity: 0,
-      ease: "power1.out",
-    });
-  }, []);
+  // const timeline = gsap.timeline();
 
   useGSAP(() => {
-    // Animate the keyboard keys, including Enter and Delete
-    timeline.from(numRefs.current, {
-      y: 100,
-      duration: 0.2,
-      stagger: 0.05,
-      opacity: 0,
-      ease: "power1.out",
+    gsap.from(fullPage.current, {
+      x: 1000,
+      // y:-1000,
+      rotate: 10,
+      duration: 1,
+      ease: "back.out(1)",
     });
   }, []);
 
@@ -110,12 +100,39 @@ const Classic = () => {
     }
   };
 
+  useGSAP(() => {
+    if (instructions) {
+      gsap.from(insref.current, {
+        x: 100,
+        y: -100,
+        scale: 0,
+        opacity: 0,
+        duration: 1,
+        rotate:30,
+        ease: "back.out(1)",
+      });
+
+    } 
+    //This is not working still some issue to resolve
+    else {
+      gsap.to(insref.current, {
+        x: 0,
+        y: 0,
+        scale: 0,
+        opacity: 0,
+        duration: 1,
+        ease: "back.in(1)",
+      });
+    }
+  }, [instructions]);
+
   const showInstructions = () => {
-    setInstructions(!instructions);
+    setInstructions((prev) => !prev); // Toggle instructions visibility
   };
 
   return (
     <div
+      ref={fullPage}
       className="h-[100vh] w-full flex gap-5 flex-col items-center"
       style={{
         backgroundImage:
@@ -153,7 +170,6 @@ const Classic = () => {
           {input.flat().map((digit, index) => (
             <div
               key={index}
-              ref={(el) => (gridRefs.current[index] = el)} // Attach each box to refs array
               className={`h-full w-full font-audiowide rounded-xl flex items-center justify-center text-4xl ${getBgColor(
                 digit,
                 index % 4
@@ -166,7 +182,6 @@ const Classic = () => {
           {currentInput.map((digit, index) => (
             <div
               key={index + input.flat().length}
-              ref={(el) => (gridRefs.current[input.flat().length + index] = el)}
               className="h-full w-full bg-red-300 font-audiowide rounded-2xl flex items-center justify-center text-4xl"
             >
               {digit}
@@ -176,11 +191,6 @@ const Classic = () => {
           {Array.from({ length: 16 - input.flat().length }).map((_, index) => (
             <div
               key={`empty-${index}`}
-              ref={(el) =>
-                (gridRefs.current[
-                  input.flat().length + currentInput.length + index
-                ] = el)
-              }
               className="h-full w-full bg-red-300 font-audiowide rounded-2xl flex items-center justify-center text-4xl"
             ></div>
           ))}
@@ -205,7 +215,6 @@ const Classic = () => {
             "Enter",
           ].map((key, index) => (
             <button
-              ref={(el) => (numRefs.current[index] = el)} // Corrected reference to use index
               key={key}
               className="h-full w-full bg-black text-green-400 flex justify-center items-center text-2xl font-orbitron rounded-2xl"
               onClick={() => handleKeyClick(key)}
@@ -240,7 +249,10 @@ const Classic = () => {
 
       {/* Instructions */}
       {instructions && (
-        <div className="absolute z-50 top-[12vh] right-[5vw] flex flex-col gap-3 p-5 rounded-lg shadow-2xl border-2 border-black bg-white bg-opacity-30 backdrop-blur-xl">
+        <div
+          ref={insref}
+          className="absolute w-[85%] z-50 top-[12vh] left-[5vw] flex flex-col gap-3 p-5 rounded-lg shadow-2xl border-2 border-black bg-white bg-opacity-30 backdrop-blur-xl"
+        >
           <h1 className="font-bold font-audiowide text-[23px]">Instructions</h1>
           <p className="font-bold font-orbitron text-sm text-black">
             1. Guess the 4 digit code.

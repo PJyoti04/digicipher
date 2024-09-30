@@ -1,47 +1,43 @@
 import React, { useEffect, useRef, useState } from "react";
 import Navbar from "./Navbar";
 import { useNavigate } from "react-router-dom";
-import gsap from "gsap"; // Removed unnecessary useGSAP
-import Loader from "./Loader"; // Assuming Loader is in the same directory
+import gsap from "gsap";
+import Loader from "./Loader";
 import { useGSAP } from "@gsap/react";
 
 const Home = () => {
   const btns = useRef([]);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true); // Start with loading as true
+  const [loading, setLoading] = useState(true); //
   const home = useRef();
 
-  // Button animation when loading is false
   useGSAP(() => {
-    if (!loading) {
-      gsap.from(btns.current, {
-        scale: 0,
-        duration: 0.7,
-        stagger: 0.3,
+    const tl = gsap.timeline();
+    if (!loading) {      
+      tl.from(home.current, {
+        x: 1000,
         opacity: 0,
+        rotate: 10,
+        duration: 1,
+        ease: "power4.out", // Custom easing for a smooth and refined animation
       });
+
+      tl.from(btns.current, {
+        x: 1000,
+        duration: 0.35,
+        stagger: 0.16,
+        opacity: 0,
+      })
     }
-  }, [loading]); // Add loading as a dependency so it runs when loading becomes false
+  }, [loading]); 
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setLoading(false); // Set loading to false after 4 seconds (or when loader is done)
+      setLoading(false); 
     }, 4000);
 
     return () => clearTimeout(timer);
   }, []);
-
-  useGSAP(() => {
-    if (!loading) {
-      // Run the home animation once the loading is false (loader is done)
-      gsap.from(home.current, {
-        duration: 1,
-        scale: 0,
-        // rotateY:180,
-        opacity: 0,
-      });
-    }
-  }, [loading]); // Only run this effect when loading becomes false
 
   const animateBtn = (index, path) => {
     gsap.to(btns.current, {
