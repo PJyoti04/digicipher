@@ -1,5 +1,6 @@
 import React from "react";
 import Home from "./Components/Pages/Home";
+import { ChakraProvider } from '@chakra-ui/react'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Rules from "./Components/Pages/Rules"
 import Classic from "./Components/Pages/Classic"
@@ -30,7 +31,9 @@ const appRouter = createBrowserRouter([
 
 const App = () => {
   return (
-    <RouterProvider router = {appRouter}></RouterProvider>
+    <ChakraProvider>
+          <RouterProvider router = {appRouter}></RouterProvider>
+    </ChakraProvider>
   );
 };
 
