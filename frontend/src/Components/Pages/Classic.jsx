@@ -3,7 +3,7 @@ import gsap from "gsap";
 import {useNavigate} from "react-router-dom";
 import { useGSAP } from "@gsap/react";
 import {ArrowBackIcon} from "@chakra-ui/icons"
-import { useDisclosure } from "@chakra-ui/react";
+// import { useDisclosure } from "@chakra-ui/react";
 import ReturnModal from "../utils/ReturnModal";
 
 const Classic = () => {
@@ -17,7 +17,7 @@ const Classic = () => {
   const [isGuessed, setIsGuessed] = useState(false);
   const [instructions, setInstructions] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  // const { isOpen, onOpen, onClose } = useDisclosure()
 
   const gridRefs = useRef([]);
   const numRefs = useRef([]);

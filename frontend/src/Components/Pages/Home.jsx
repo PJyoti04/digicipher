@@ -77,28 +77,28 @@ const Home = () => {
         <button
           ref={(el) => (btns.current[0] = el)}
           onClick={() => animateBtn(0, "/classic")}
-          className="w-[80%] text-3xl border-2 border-white text-white h-max py-4 bg-[#e0e0e0] font-audiowide cursor-pointer bg-opacity-20 backdrop-blur-2xl overflow-hidden"
+          className="w-[85%] text-3xl border-2 border-white text-white h-max py-4 bg-[#e0e0e0] font-audiowide cursor-pointer bg-opacity-20 backdrop-blur-2xl overflow-hidden"
         >
           CLASSIC
         </button>
         <button
           ref={(el) => (btns.current[1] = el)}
           onClick={() => animateBtn(1, "/challenger")}
-          className="w-[80%] text-3xl border-2 border-white text-white h-max py-4 bg-[#e0e0e0] font-audiowide cursor-pointer bg-opacity-20 backdrop-blur-2xl overflow-hidden"
+          className="w-[85%] text-3xl border-2 border-white text-white h-max py-4 bg-[#e0e0e0] font-audiowide cursor-pointer bg-opacity-20 backdrop-blur-2xl overflow-hidden"
         >
           CHALLENGER
         </button>
         <button
           ref={(el) => (btns.current[2] = el)}
           onClick={() => animateBtn(2, "/leaderboard")}
-          className="w-[80%] text-3xl border-2 border-white text-white h-max py-4 bg-[#e0e0e0] font-audiowide cursor-pointer bg-opacity-20 backdrop-blur-2xl overflow-hidden"
+          className="w-[85%] text-3xl border-2 border-white text-white h-max py-4 bg-[#e0e0e0] font-audiowide cursor-pointer bg-opacity-20 backdrop-blur-2xl overflow-hidden"
         >
           LEADERBOARD
         </button>
         <button
           ref={(el) => (btns.current[3] = el)}
           onClick={() => animateBtn(3, "/rules")}
-          className="w-[80%] text-3xl border-2 border-white text-white h-max py-4 bg-[#e0e0e0] font-audiowide cursor-pointer bg-opacity-20 backdrop-blur-2xl overflow-hidden"
+          className="w-[85%] text-3xl border-2 border-white text-white h-max py-4 bg-[#e0e0e0] font-audiowide cursor-pointer bg-opacity-20 backdrop-blur-2xl overflow-hidden"
         >
           INSTRUCTIONS
         </button>
