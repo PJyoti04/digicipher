@@ -32,19 +32,19 @@ const appRouter = createBrowserRouter([
 ]);
 
 const App = () => {
-  const [loading, setLoading] = useState(true); // Initialize loading state
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
-    // Simulate a loading delay of 4 seconds
+    
     const timer = setTimeout(() => {
-      setLoading(false); // Stop loading after 4 seconds
+      setLoading(false); 
     }, 4000);
 
-    return () => clearTimeout(timer); // Cleanup the timer on component unmount
+    return () => clearTimeout(timer); 
   }, []);
 
   if (loading) {
-    return <Loader />; // Show loader when loading is true
+    return <Loader />; 
   }
 
   return <RouterProvider router={appRouter} />; // Render RouterProvider after loading
