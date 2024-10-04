@@ -8,35 +8,18 @@ import { useGSAP } from "@gsap/react";
 const Home = () => {
   const btns = useRef([]);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true); //
+  const [loading, setLoading] = useState(true);
   const home = useRef();
 
   useGSAP(() => {
     const tl = gsap.timeline();
-    if (!loading) {      
-      tl.from(home.current, {
-        x: 1000,
-        opacity: 0,
-        rotate: 10,
-        duration: 1,
-        ease: "power4.out", // Custom easing for a smooth and refined animation
-      });
 
-      tl.from(btns.current, {
-        x: 1000,
-        duration: 0.35,
-        stagger: 0.16,
-        opacity: 0,
-      })
-    }
-  }, [loading]); 
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false); 
-    }, 4000);
-
-    return () => clearTimeout(timer);
+    tl.from(btns.current, {
+      x: 1000,
+      duration: 0.35,
+      stagger: 0.16,
+      opacity: 0,
+    });
   }, []);
 
   const animateBtn = (index, path) => {
@@ -50,20 +33,14 @@ const Home = () => {
     });
   };
 
-  if (loading) {
-    return <Loader />;
-  }
-
   return (
     <div
       ref={home}
-      className="h-[100vh] flex flex-col gap-6"
+      className="h-screen w-screen flex flex-col gap-6 overflow-hidden"
       style={{
         backgroundImage: `url('Designer (2).jpeg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        height: "100vh",
-        width: "100%",
       }}
     >
       <div>
