@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 import Navbar from "../utils/Navbar";
 import Footer from "../utils/Footer";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 const Home = () => {
   const pages = [
@@ -20,8 +22,19 @@ const Home = () => {
       link: "leaderboard",
       name: "Leaderboard",
     },
-    
   ];
+
+  const ref3 = useRef([]);
+
+  useGSAP(()=>{
+    gsap.from(ref3.current,{
+      x: -1000,
+      duration: 0.5,
+      opacity:0,
+      stagger: 0.3,
+      delay:0.8
+    })
+  })
   return (
     <div
       className="bg-black"
@@ -35,13 +48,13 @@ const Home = () => {
         {pages.map((page, index) => (
           <button
             key={index}
-            style={{ fontFamily: "lunar" }}
-            className="h-[10%] w-[80%] py-2 bg-white
-      bg-opacity-25 border-2 border-white backdrop-blur-3xl
-      text-white font-bold text-3xl flex items-center 
+            ref={(el)=>(ref3.current[index]=el)}
+            style={{ fontFamily: "caleb" }}
+            className="h-[10%] w-[80%] py-2 bg-[black]
+      bg-opacity-25 border-2 border-[#3ef4f4] backdrop-blur-3xl
+      text-[#3ef4f4] text-[44px] flex items-center font-semibold
       justify-center uppercase"
-          >
-            {page.name}
+          ><p className="mt-2">{page.name}</p>
           </button>
         ))}
       </div>

@@ -4,26 +4,6 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: "Logo"; /* Replace with your desired font name */
-  src: url("/public/round-8-font-1727593881-0/round8-four.otf")
-    format("opentype"); /* Adjust the file path */
-  font-weight: normal; /* Specify normal, bold, etc. */
-  font-style: normal; /* Specify normal, italic, etc. */
-}
-@font-face {
-  font-family: "alto";
-  src: url("/public/aalto-font-1727594448-0/aalto-display-personal-use.otf")
-    format("opentype");
-  font-weight: normal; /* Specify normal, bold, etc. */
-  font-style: normal;
-}
-
-@font-face {
-    font-family: 'cal';
-    src: url("/public/caelia-font-family-1727594684-0/CaeliaDemo-Light-BF66f646ddd7f29.otf") format("opentype");
-}
-
-@font-face {
     font-family: 'sil';
     src: url("/public/silver-magnum-font-1727594873-0/silvermagnum-regular.otf") format("opentype");
 }
@@ -41,4 +21,24 @@
 @font-face {
   font-family: 'thunder';
   src: url("/public/thunderile-font-1728110210-0/Thunderile-Regular-BF66e92b2163095.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'caelia';
+  src: url("/public/caelia-font-family-1727594684-0/CaeliaDemo-Medium-BF66f646de2df91.otf") format("opentype");
+}
+
+@font-face {
+  font-family: 'caleb';
+  src: url("/public/cs-caleb-mono-font-1728128449-0/CSCalebMono-Regular_demo-BF66fdfdb41c984.otf") format("opentype");
+}
+
+@font-face {
+  font-family: 'nano';
+  src: url("/public/nano-pix-font-1728128434-0/NanoPixDEMO-Regular-BF669a1c8063433.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: 'origami';
+  src: url("/public/origamet-hamida-font-1728129179-0/Origamet-Hamida-BF657c165192d21.otf") format('opentype');
 }
