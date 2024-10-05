@@ -6,6 +6,7 @@ import Challenger from "./Components/Pages/Challenger";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Leaderboard from './Components/Pages/Leaderboard'
 import Loader from './Components/utils/Loader'
+import { ChakraProvider } from '@chakra-ui/react'
 
 const appRouter = createBrowserRouter([
   {
@@ -45,7 +46,7 @@ const App = () => {
     return <Loader />;
   }
 
-  return <RouterProvider router={appRouter} />; // Render RouterProvider after loading
+  return( <ChakraProvider><RouterProvider router={appRouter} /> </ChakraProvider> )// Render RouterProvider after loading
 };
 
 export default App;
