@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import Home from "./Components/Pages/Home";
+import Home from "./Pages/Home";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Rules from "./Components/Pages/Rules";
-import Classic from "./Components/Pages/Classic";
-import Challenger from "./Components/Pages/Challenger";
-import Leaderboard from "./Components/Pages/Leaderboard";
-import Loader from "./Components/Pages/Loader";
+import Rules from "./Pages/Rules";
+import Classic from "./Pages/Classic";
+import Challenger from "./Pages/Challenger";
+import Leaderboard from "./Pages/Leaderboard"; // Corrected import
+import Loader from "./Components/Loader"; // Corrected import
 
-// Define the appRouter here
+
 const appRouter = createBrowserRouter([
   {
     path: "/",
