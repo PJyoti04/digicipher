@@ -5,10 +5,6 @@ import Footer from "../utils/Footer";
 const Home = () => {
   const pages = [
     {
-      link: "/",
-      name: "Home",
-    },
-    {
       link: "classic",
       name: "Classic",
     },
@@ -18,8 +14,13 @@ const Home = () => {
     },
     {
       link: "/rules",
-      name: "Instructions",
+      name: "How To play",
     },
+    {
+      link: "leaderboard",
+      name: "Leaderboard",
+    },
+    
   ];
   return (
     <div
@@ -34,7 +35,11 @@ const Home = () => {
         {pages.map((page, index) => (
           <button
             key={index}
-            className="h-[6vh] w-[25vh] bg-white bg-opacity-5 border-2 border-white backdrop-blur-3xl text-white font-bold text-3xl flex items-center justify-center"
+            style={{ fontFamily: "lunar" }}
+            className="h-[8%] py-3 w-[80%] px-2 bg-white
+      bg-opacity-25 border-2 border-white backdrop-blur-3xl
+      text-white font-bold text-3xl flex items-center 
+      justify-center uppercase"
           >
             {page.name}
           </button>

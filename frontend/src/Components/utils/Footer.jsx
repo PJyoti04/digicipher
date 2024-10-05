@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="flex justify-between w-[98%] h-[80%] bg-opacity-15 bg-white border-2 border-white backdrop-blur-3xl rounded-full px-4">
         <div className="flex items-center text-white gap-1 text-xl">
           <FaRegCopyright size={"32px"} color="white" />
-          All Rights Reserved
+          <p style={{fontFamily:'pixel'}} className="mt-1">All Rights Reserved</p>
         </div>
         <div className="flex items-center">
           <FaGithub size={"48px"} color="white" />

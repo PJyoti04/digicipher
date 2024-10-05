@@ -32,3 +32,13 @@
   font-family: 'pixel';
   src: url("/public/game-paused-display-font-1728108692-0/Game-Paused-DEMO-BF6699ef512572b.otf") format("opentype");
 }
+
+@font-face {
+  font-family: 'lunar';
+  src: url("/public/lunar-escape-font-1728110221-0/lunarescape-1jxvb.otf") format("opentype");
+}
+
+@font-face {
+  font-family: 'thunder';
+  src: url("/public/thunderile-font-1728110210-0/Thunderile-Regular-BF66e92b2163095.ttf") format("truetype");
+}
