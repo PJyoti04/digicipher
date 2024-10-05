@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import Home from "./Pages/Home";
+=======
+import React from "react";
+import Home from "./Components/Pages/Home";
+import { ChakraProvider } from '@chakra-ui/react'
+>>>>>>> main
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Rules from "./Pages/Rules";
 import Classic from "./Pages/Classic";
@@ -32,6 +38,7 @@ const appRouter = createBrowserRouter([
 ]);
 
 const App = () => {
+<<<<<<< HEAD
   const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
@@ -48,6 +55,13 @@ const App = () => {
   }
 
   return <RouterProvider router={appRouter} />; // Render RouterProvider after loading
+=======
+  return (
+    <ChakraProvider>
+          <RouterProvider router = {appRouter}></RouterProvider>
+    </ChakraProvider>
+  );
+>>>>>>> main
 };
 
 export default App;

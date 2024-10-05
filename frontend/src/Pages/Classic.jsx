@@ -1,6 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState} from "react";
 import gsap from "gsap";
+import {useNavigate} from "react-router-dom";
 import { useGSAP } from "@gsap/react";
+import {ArrowBackIcon} from "@chakra-ui/icons"
+// import { useDisclosure } from "@chakra-ui/react";
+import ReturnModal from "../utils/ReturnModal";
 
 const Classic = () => {
   const [input, setInput] = useState([[], [], [], []]);
@@ -12,11 +16,19 @@ const Classic = () => {
   const [win, setWin] = useState(false);
   const [isGuessed, setIsGuessed] = useState(false);
   const [instructions, setInstructions] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  // const { isOpen, onOpen, onClose } = useDisclosure()
 
+<<<<<<< HEAD:frontend/src/Pages/Classic.jsx
   // const gridRefs = useRef();
   // const numRefs = useRef();
   const fullPage = useRef();
   const insref = useRef();
+=======
+  const gridRefs = useRef([]);
+  const numRefs = useRef([]);
+  const nav = useNavigate();
+>>>>>>> main:frontend/src/Components/Pages/Classic.jsx
 
   // const timeline = gsap.timeline();
 
@@ -130,6 +142,15 @@ const Classic = () => {
     setInstructions((prev) => !prev); // Toggle instructions visibility
   };
 
+  const handleBackClick = () => {
+    setShowModal(true)
+  }
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+
   return (
     <div
       ref={fullPage}
@@ -142,6 +163,7 @@ const Classic = () => {
       <div className="w-full h-[10%] p-2">
         <nav className="flex justify-between items-center px-2 py-1 bg-white border-2 border-black bg-opacity-20 rounded-[80px] backdrop-blur-3xl">
           <div className="flex items-center gap-1">
+            <ArrowBackIcon boxSize={7} onClick={() => {handleBackClick()}} />
             <img
               src="logo.jpeg"
               alt="DigiCipher logo"
@@ -245,6 +267,15 @@ const Classic = () => {
             Play Again
           </button>
         </div>
+      )}
+
+      {/* Modal to move Back */}
+      {showModal && (
+        <ReturnModal
+          isOpen={showModal}
+          onClose={handleCloseModal} // Pass function to close modal
+          onConfirm={() => nav("/")} // Navigate to another route on confirmation
+        />
       )}
 
       {/* Instructions */}
