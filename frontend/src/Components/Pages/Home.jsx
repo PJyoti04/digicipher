@@ -26,7 +26,7 @@ const Home = () => {
     <div
       className="bg-black"
       style={{
-        backgroundImage: "url('public/bg.svg')",
+        backgroundImage: "url('./bg.svg')",
         backgroundSize: "cover",
       }}
     >
