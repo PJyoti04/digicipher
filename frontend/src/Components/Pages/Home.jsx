@@ -31,12 +31,12 @@ const Home = () => {
       }}
     >
       <Navbar />
-      <div className="h-[80vh] w-full flex justify-center gap-6 items-center flex-col">
+      <div className="h-[84vh] w-full flex justify-center gap-6 items-center flex-col">
         {pages.map((page, index) => (
           <button
             key={index}
             style={{ fontFamily: "lunar" }}
-            className="h-[10%] py-3 w-[80%] py-2 bg-white
+            className="h-[10%] w-[80%] py-2 bg-white
       bg-opacity-25 border-2 border-white backdrop-blur-3xl
       text-white font-bold text-3xl flex items-center 
       justify-center uppercase"
