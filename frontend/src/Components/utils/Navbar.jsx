@@ -11,7 +11,7 @@ const Navbar = () => {
         </div>
 
         <p
-          className="text-5xl text-white flex items-center h-full mt-1"
+          className="text-5xl text-white flex items-center h-full mt-2"
           style={{ fontFamily: "pixel" }}
         >
           DIGICIPHER
