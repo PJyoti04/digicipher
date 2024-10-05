@@ -26,7 +26,7 @@ const Home = () => {
     <div
       className="bg-black"
       style={{
-        backgroundImage: "url('public/bg.svg')",
+        backgroundImage: "url('./bg.svg')",
         backgroundSize: "cover",
       }}
     >
@@ -36,7 +36,7 @@ const Home = () => {
           <button
             key={index}
             style={{ fontFamily: "lunar" }}
-            className="h-[8%] py-3 w-[80%] px-2 bg-white
+            className="h-[10%] py-3 w-[80%] py-2 bg-white
       bg-opacity-25 border-2 border-white backdrop-blur-3xl
       text-white font-bold text-3xl flex items-center 
       justify-center uppercase"
