@@ -1,11 +1,12 @@
-import React from "react";
-import Home from "./Components/Pages/Home";
-import { ChakraProvider } from '@chakra-ui/react'
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import Home from './Components/Pages//Home'
 import Rules from "./Components/Pages/Rules"
-import Classic from "./Components/Pages/Classic"
-import Challenger from "./Components/Pages/Challenger"
-import Leaderboard from "./Components/Pages/Leaderboard"
+import Classic from './Components/Pages/Classic'
+import Challenger from "./Components/Pages/Challenger";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Leaderboard from './Components/Pages/Leaderboard'
+import Loader from './Components/utils/Loader'
+
 const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -30,11 +31,21 @@ const appRouter = createBrowserRouter([
 ]);
 
 const App = () => {
-  return (
-    <ChakraProvider>
-          <RouterProvider router = {appRouter}></RouterProvider>
-    </ChakraProvider>
-  );
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  return <RouterProvider router={appRouter} />; // Render RouterProvider after loading
 };
 
 export default App;
