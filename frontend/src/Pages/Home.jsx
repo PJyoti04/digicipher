@@ -22,13 +22,22 @@ const Home = () => {
     },
   ];
   return (
-    <div>
+    <div
+      className="bg-black"
+      style={{
+        backgroundImage: "url('public/bg.svg')",
+        backgroundSize: "cover",
+      }}
+    >
       <Navbar />
-      <div className="h-[84vh] w-full flex justify-center gap-6 items-center flex-col">
+      <div className="h-[80vh] w-full flex justify-center gap-6 items-center flex-col">
         {pages.map((page, index) => (
-          <div key={index} className="h-[6vh] w-[25vh] bg-slate-500 text-white font-bold text-3xl flex items-center justify-center">
-            {page.name}{" "}
-          </div>
+          <button
+            key={index}
+            className="h-[6vh] w-[25vh] bg-white bg-opacity-5 border-2 border-white backdrop-blur-3xl text-white font-bold text-3xl flex items-center justify-center"
+          >
+            {page.name}
+          </button>
         ))}
       </div>
       <Footer />

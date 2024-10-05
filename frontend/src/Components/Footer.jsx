@@ -1,15 +1,21 @@
-import React from 'react'
+import React from "react";
 import { FaGithub } from "react-icons/fa6";
 import { FaRegCopyright } from "react-icons/fa";
 
-
 const Footer = () => {
   return (
-    <div className='h-[8vh] w-full flex justify-between px-4 items-center'>
-        <div className='flex items-center gap-1 text-lg'><FaRegCopyright size={"28px"}/>All Rights Reserved</div>
-        <FaGithub size={"36px"}/>
+    <div className="h-[10vh] w-full flex justify-center items-center">
+      <div className="flex justify-between w-[98%] h-[80%] bg-opacity-15 bg-white border-2 border-white backdrop-blur-3xl rounded-full px-4">
+        <div className="flex items-center text-white gap-1 text-xl">
+          <FaRegCopyright size={"32px"} color="white" />
+          All Rights Reserved
+        </div>
+        <div className="flex items-center">
+          <FaGithub size={"48px"} color="white" />
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
