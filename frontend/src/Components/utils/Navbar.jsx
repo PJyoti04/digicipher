@@ -2,34 +2,29 @@ import React, { useRef } from "react";
 import User from "./Avatar";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { IoHomeOutline } from "react-icons/io5";
-
+import { Link } from "react-router-dom";
+import { FaGithub } from "react-icons/fa6";
 
 const Navbar = () => {
   const ref2 = useRef();
 
-  useGSAP(()=>{
-    gsap.from(ref2.current,{
-      y:-200,
-      opacity:0,
-      duration:0.8,
-
-    })
-  })
+  useGSAP(() => {
+    gsap.from(ref2.current, {
+      y: -200,
+      opacity: 0,
+      duration: 0.8,
+    });
+  });
   return (
     <div className="h-[9vh] w-full flex justify-center items-center">
-      <div 
-      ref={ref2}
-      className="h-[100%] w-[100%] bg-white bg-opacity-15 px-4 backdrop-blur-3xl flex justify-between items-center rounded-br-3xl rounded-bl-3xl ">
-        <p
-          className="text-5xl text-[#03dffc] flex items-center h-full mt-2"
-          style={{ fontFamily: "pixel" }}
-        >
-          DIGICIPHER
-        </p>
-        
-        <div className="h-full flex items-center gap-4">
-        <IoHomeOutline color="white" size={"24px"}/>
+      <div
+        ref={ref2}
+        className="h-[100%] w-[100%] px-4 flex justify-between items-center rounded-br-3xl rounded-bl-3xl "
+      >
+        <div className="h-full w-full flex items-center justify-between">
+          <Link to="https://github.com/KC1064/open_the_vault" target="_blank">
+            <FaGithub size={"32px"} color="white" />
+          </Link>
           <User />
         </div>
       </div>

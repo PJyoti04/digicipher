@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
-import { FaGithub } from "react-icons/fa6";
+// import { FaGithub } from "react-icons/fa6";
 import { FaRegCopyright } from "react-icons/fa";
-import { BsInfoCircle } from "react-icons/bs";
+// import { BsInfoCircle } from "react-icons/bs";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Link } from "react-router-dom";
@@ -19,24 +19,21 @@ const Footer = () => {
     <div className="h-[9vh] w-full flex justify-center items-center">
       <div
         ref={ref1}
-        className="flex justify-between w-[100%] h-[100%] bg-opacity-15 rounded-tr-3xl rounded-tl-3xl
-        bg-white backdrop-blur-3xl px-4"
+        className="flex justify-between w-[100%] h-[100%] bg-opacity-15 rounded-tr-3xl rounded-tl-3xl px-4"
       >
         <div className="flex items-center text-[white] gap-1 text-xl">
-          <FaRegCopyright size={"15px"} color="white" />
+          <FaRegCopyright size={"18px"} color="white" />
           <p
-            style={{ fontFamily: "origami", fontSize: "15px" }}
-            className="mt-1 font-thin"
+            style={{ fontFamily: "origami" }}
+            className="mt-1 font-thin text-lg"
           >
             All Rights Reserved
           </p>
         </div>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center">
           <Link to="/about">
-            <BsInfoCircle size={"32px"} color="white" />
-          </Link>
-          <Link to="https://github.com/KC1064/open_the_vault" target="_blank">
-            <FaGithub size={"32px"} color="white" />
+            <p style={{fontFamily:'origami'}}
+             className="text-[white] text-lg mt-1">About Us</p>
           </Link>
         </div>
       </div>
