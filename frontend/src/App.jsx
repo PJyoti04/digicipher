@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Leaderboard from './Components/Pages/Leaderboard'
 import Loader from './Components/utils/Loader'
 import { ChakraProvider } from '@chakra-ui/react'
+import About from "./Components/Pages/About";
 
 const appRouter = createBrowserRouter([
   {
@@ -28,7 +29,10 @@ const appRouter = createBrowserRouter([
   {
     path: "/leaderboard",
     element: <Leaderboard />,
-  },
+  },{
+    path: "/about",
+    element: <About />
+  }
 ]);
 
 const App = () => {
