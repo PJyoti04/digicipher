@@ -6,7 +6,7 @@ const User = () => {
     <div>
         <Wrap>
             <WrapItem>
-                <Avatar size='md'  name='' src='' />
+                <Avatar size='sm'  name='' src='' />
             </WrapItem>
         </ Wrap>
     </div>

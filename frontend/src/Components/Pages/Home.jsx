@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Navbar from "../utils/Navbar";
 import Footer from "../utils/Footer";
 import { useGSAP } from "@gsap/react";
@@ -56,7 +56,7 @@ const Home = () => {
       }}
     >
       <div className="h-full w-full bg-opacity-20 backdrop-blur-sm">
-        <Navbar />
+        <Navbar showNav={true} />
         <div className="h-[82vh] w-full flex items-center flex-col gap-8">
           <p
             className="text-7xl w-full text-[#00FFFF] text-center mt-16 mb-6"
