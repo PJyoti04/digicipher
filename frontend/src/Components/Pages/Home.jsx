@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useRef } from "react";
 import Navbar from "../utils/Navbar";
 import Footer from "../utils/Footer";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   const pages = [
     {
       link: "classic",
@@ -14,38 +18,69 @@ const Home = () => {
     },
     {
       link: "/rules",
-      name: "How To play",
+      name: "How To Play",
     },
     {
       link: "leaderboard",
       name: "Leaderboard",
     },
-    
   ];
+
+  const ref3 = useRef([]);
+
+  const goto = (index, path) => {
+    gsap.to(ref3.current[index], {
+      duration: 0.5,
+      scale: 0,
+      opacity: 0,
+      onComplete: () => navigate(path),
+    });
+  };
+
+  useGSAP(() => {
+    gsap.from(ref3.current, {
+      scale: 0,
+      opacity: 0,
+      duration: 0.5,
+      stagger: 0.4,
+      delay: 0.8,
+    });
+  });
+
   return (
     <div
-      className="bg-black"
+      className="bg-black flex flex-col"
       style={{
         backgroundImage: "url('./bg.svg')",
         backgroundSize: "cover",
       }}
     >
-      <Navbar />
-      <div className="h-[80vh] w-full flex justify-center gap-6 items-center flex-col">
-        {pages.map((page, index) => (
-          <button
-            key={index}
-            style={{ fontFamily: "lunar" }}
-            className="h-[8%] py-3 w-[80%] px-2 bg-white
-      bg-opacity-25 border-2 border-white backdrop-blur-3xl
-      text-white font-bold text-3xl flex items-center 
-      justify-center uppercase"
+      <div className="h-full w-full bg-opacity-20 backdrop-blur-sm">
+        <Navbar />
+        <div className="h-[82vh] w-full flex items-center flex-col gap-8">
+          <p
+            className="text-7xl w-full text-[#00FFFF] text-center mt-16 mb-6"
+            style={{ fontFamily: "pixel" }}
           >
-            {page.name}
-          </button>
-        ))}
+            DIGICIPHER
+          </p>
+            {pages.map((page, index) => (
+              <button
+                key={index}
+                ref={(el) => (ref3.current[index] = el)}
+                style={{ fontFamily: "origami" }}
+                onClick={() => goto(index, page.link)}
+                className="h-[8%] w-[60%] py-2 bg-white bg-opacity-25 border-2 border-[#00FFCC] backdrop-blur-3xl
+            text-[#00FFCC] flex items-center font-semibold 
+            justify-center uppercase">
+                <p className="mt-2 lg:text-4xl md:text-3xl sm:text-2xl text-[28px]">
+                  {page.name}
+                </p>
+              </button>
+            ))}
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 };
