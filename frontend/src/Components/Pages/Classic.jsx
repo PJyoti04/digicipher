@@ -2,9 +2,11 @@ import React, { useEffect, useRef, useState} from "react";
 import gsap from "gsap";
 import {useNavigate} from "react-router-dom";
 import { useGSAP } from "@gsap/react";
-import {ArrowBackIcon} from "@chakra-ui/icons"
+// import {ArrowBackIcon} from "@chakra-ui/icons"
+import Navbar from "../utils/Navbar";
 // import { useDisclosure } from "@chakra-ui/react";
 import ReturnModal from "../utils/ReturnModal";
+import Footer from "../utils/Footer";
 
 const Classic = () => {
   const [input, setInput] = useState([[], [], [], []]);
@@ -132,37 +134,25 @@ const Classic = () => {
 
   return (
     <div
-      className="h-[100vh] w-full flex gap-5 flex-col items-center"
-      style={{
-        backgroundImage:
-          "linear-gradient(to right top, #b3e0e8, #a4c8d6, #95b1c4, #88a1b1, #7a8b9e, #748a8d, #708c8b, #6c8e88, #66909c, #7aa2ab, #8fb3ba, #a6c4c9)",
+      className="h-[100vh] w-full flex gap-5 flex-col items-center bg-black"
+      style={{backgroundImage:"url('./bg.svg')",
+        backgroundSize:"cover"
       }}
+      // style={{
+      //   backgroundImage:
+      //     "linear-gradient(to right top, #b3e0e8, #a4c8d6, #95b1c4, #88a1b1, #7a8b9e, #748a8d, #708c8b, #6c8e88, #66909c, #7aa2ab, #8fb3ba, #a6c4c9)",
+      // }}
     >
+      <div className="h-full w-full bg-opacity-20 backdrop-blur-sm flex flex-col items-center gap-8">
       <div className="w-full h-[10%] p-2">
-        <nav className="flex justify-between items-center px-2 py-1 bg-white border-2 border-black bg-opacity-20 rounded-[80px] backdrop-blur-3xl">
-          <div className="flex items-center gap-1">
-            <ArrowBackIcon boxSize={7} onClick={() => {handleBackClick()}} />
-            <img
-              src="logo.jpeg"
-              alt="DigiCipher logo"
-              className="h-12 w-12 rounded-full"
-            />
-            <p className="text-[22px] font-bold font-audiowide">DigiCipher</p>
-          </div>
-          <div className="flex gap-3 justify-center items-center">
-            <h1
-              className="bg-white h-10 w-10 text-3xl flex justify-center items-center rounded-full"
-              onClick={showInstructions}
-            >
-              i
-            </h1>
-            <img
-              src="https://avatar.iran.liara.run/public/3"
-              alt="User avatar"
-              className="h-[49px] w-auto"
-            />
-          </div>
-        </nav>
+        <Navbar />
+      </div>
+      <div style={{
+        display:"flex",
+        justifyContent:"left",
+        alignItems:"flex-end"
+      }}>
+        <button style={{color:"white",border:"1px solid white",padding:"7px",fontWeight:"600",background:""}} onClick={showInstructions}>How To Play</button>
       </div>
 
       <div className="h-[35%] w-[75%]">
@@ -255,18 +245,9 @@ const Classic = () => {
         </div>
       )}
 
-      {/* Modal to move Back */}
-      {showModal && (
-        <ReturnModal
-          isOpen={showModal}
-          onClose={handleCloseModal} // Pass function to close modal
-          onConfirm={() => nav("/")} // Navigate to another route on confirmation
-        />
-      )}
-
       {/* Instructions */}
       {instructions && (
-        <div className="absolute z-50 top-[12vh] right-[5vw] flex flex-col gap-3 p-5 rounded-lg shadow-2xl border-2 border-black bg-white bg-opacity-30 backdrop-blur-xl">
+        <div className="absolute z-50 top-[22vh] right-[5vw] flex flex-col gap-3 p-5 rounded-lg shadow-2xl border-2 border-black bg-white bg-opacity-70 backdrop-blur-xl">
           <h1 className="font-bold font-audiowide text-[23px]">Instructions</h1>
           <p className="font-bold font-orbitron text-sm text-black">
             1. Guess the 4 digit code.
@@ -279,6 +260,9 @@ const Classic = () => {
           </p>
         </div>
       )}
+
+      <Footer />
+      </div>
     </div>
   );
 };
