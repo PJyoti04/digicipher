@@ -22,10 +22,10 @@ const Footer = () => {
         className="flex justify-between w-[100%] h-[100%] bg-opacity-15 rounded-tr-3xl rounded-tl-3xl px-4"
       >
         <div className="flex items-center text-[white] gap-1 text-xl">
-          <FaRegCopyright size={"18px"} color="white" />
+          <FaRegCopyright size={"16px"} color="white" />
           <p
             style={{ fontFamily: "origami" }}
-            className="mt-1 font-thin text-lg"
+            className="mt-1 font-thin text-sm"
           >
             All Rights Reserved
           </p>
@@ -33,7 +33,7 @@ const Footer = () => {
         <div className="flex items-center">
           <Link to="/about">
             <p style={{fontFamily:'origami'}}
-             className="text-[white] text-lg mt-1">About Us</p>
+             className="text-[white] text-sm mt-1">About Us</p>
           </Link>
         </div>
       </div>
