@@ -92,7 +92,7 @@ const Classic = () => {
           setPlayAgain(true);
         } else {
           setIsMatch(false);
-          if (currentRow < 0) {
+          if (currentRow < 3) {
             setCurrentRow(currentRow + 1);
           } else {
             setPlayAgain(true);
