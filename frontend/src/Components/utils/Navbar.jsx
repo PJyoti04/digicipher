@@ -22,9 +22,9 @@ const Navbar = ({showNav}) => {
     });
   });
 
-  const showInstructions = () => {
-    setInstructions(!instructions);
-  };
+  // const showInstructions = () => {
+  //   setInstructions(!instructions);
+  // };
 
   const handleBackClick = () => {
     setShowModal(true)
