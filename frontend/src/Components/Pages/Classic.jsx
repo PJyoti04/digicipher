@@ -5,10 +5,9 @@ import { useGSAP } from "@gsap/react";
 // import {ArrowBackIcon} from "@chakra-ui/icons"
 import Navbar from "../utils/Navbar";
 // import { useDisclosure } from "@chakra-ui/react";
-import ReturnModal from "../utils/ReturnModal";
+import ResultModal from "../utils/ResultModal";
 import Footer from "../utils/Footer";
-import { MdOutlineCancel } from "react-icons/md";
-
+// import { MdOutlineCancel } from "react-icons/md";
 
 const Classic = () => {
   const [input, setInput] = useState([[], [], [], []]);
@@ -32,8 +31,8 @@ const Classic = () => {
   useGSAP(() => {
     gsap.from(ins.current, {
       scaleX: 0,
-      scaleY:0,
-      duration: 0.5,
+      scaleY: 0,
+      duration: 0.2,
     });
   }, [instructions]);
 
@@ -42,21 +41,24 @@ const Classic = () => {
   //   const timeline = gsap.timeline();
   //   timeline.from(container.current[0], {
   //     scale:0,
+  //     x:800,
   //     duration: 0.35,
   //     opacity: 0,
-  //     // stagger:0.2
+  //     stagger:0.2
   //   });
   //   timeline.from(container.current[1], {
   //     scale:0,
+  //     x:-800,
   //     duration: 0.35,
   //     opacity: 0,
-  //     // stagger:0.2
+  //     stagger:0.2
   //   });
   //   timeline.from(container.current[2], {
   //     scale:0,
+  //     x:800,
   //     duration: 0.35,
   //     opacity: 0,
-  //     // stagger:0.2
+  //     stagger:0.2
   //   });
   // }, []);
   //--------------------
@@ -65,7 +67,7 @@ const Classic = () => {
   useGSAP(() => {
     // const timeline = gsap.timeline();
     gsap.from(container.current, {
-      scale: 0,
+      scaleX: 0,
       duration: 0.5,
       opacity: 0,
       // stagger:0.2
@@ -90,7 +92,7 @@ const Classic = () => {
           setPlayAgain(true);
         } else {
           setIsMatch(false);
-          if (currentRow < 3) {
+          if (currentRow < 0) {
             setCurrentRow(currentRow + 1);
           } else {
             setPlayAgain(true);
@@ -119,7 +121,7 @@ const Classic = () => {
 
   useEffect(() => {
     setRandomNum(generateNumber());
-    console.log(randomNum);
+    // console.log(randomNum);
   }, []);
 
   const generateNumber = () => {
@@ -130,6 +132,8 @@ const Classic = () => {
         digits.push(randomDigit);
       }
     }
+    console.log(digits.join(""));
+    
     return digits.join("");
   };
 
@@ -153,7 +157,7 @@ const Classic = () => {
   };
 
   const handleCloseModal = () => {
-    setShowModal(false);
+    setPlayAgain(false);
   };
 
   return (
@@ -274,7 +278,7 @@ const Classic = () => {
         </div>
 
         {/* Play Again */}
-        {playAgain && (
+        {/* {playAgain && (
           <div className="h-[100vh] w-[100%] absolute gap-4 flex-col font-pressStart bg-white bg-opacity-20 backdrop-blur-lg flex justify-center items-center">
             <h1 className="text-7xl">
               {win ? (
@@ -293,6 +297,17 @@ const Classic = () => {
               Play Again
             </button>
           </div>
+        )} */}
+
+        {playAgain && (
+          <ResultModal
+            isOpen={true}
+            onClose={handleCloseModal} // Pass function to close modal
+            onConfirm={() => nav("/")}
+            onPlay={ () => {resetGame()}}
+            win={win}
+            randnum={randomNum}
+          />
         )}
 
         {/* Instructions */}
