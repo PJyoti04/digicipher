@@ -41,9 +41,9 @@ const Home = () => {
     gsap.from(ref3.current, {
       scale: 0,
       opacity: 0,
-      duration: 0.5,
-      stagger: 0.4,
-      delay: 0.8,
+      duration: 0.3,
+      stagger: 0.2,
+      delay: 0.5,
     });
   });
 
