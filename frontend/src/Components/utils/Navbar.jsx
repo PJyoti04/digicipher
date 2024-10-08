@@ -18,7 +18,7 @@ const Navbar = ({showNav}) => {
     gsap.from(ref2.current, {
       y: -200,
       opacity: 0,
-      duration: 0.8,
+      duration: 0.4,
     });
   });
 

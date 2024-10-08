@@ -12,7 +12,7 @@ const Footer = () => {
     gsap.from(ref1.current, {
       y: 200,
       opacity: 0,
-      duration: 0.8,
+      duration: 0.4,
     });
   });
   return (

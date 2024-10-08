@@ -5,48 +5,48 @@
 
 @font-face {
   font-family: "sil";
-  src: url("/public/silver-magnum-font-1727594873-0/silvermagnum-regular.otf")
+  src: url("/silver-magnum-font-1727594873-0/silvermagnum-regular.otf")
     format("opentype");
 }
 
 @font-face {
   font-family: "pixel";
-  src: url("/public/game-paused-display-font-1728108692-0/Game-Paused-DEMO-BF6699ef512572b.otf")
+  src: url("/game-paused-display-font-1728108692-0/Game-Paused-DEMO-BF6699ef512572b.otf")
     format("opentype");
 }
 
 @font-face {
   font-family: "lunar";
-  src: url("/public/lunar-escape-font-1728110221-0/lunarescape-1jxvb.otf")
+  src: url("/lunar-escape-font-1728110221-0/lunarescape-1jxvb.otf")
     format("opentype");
 }
 
 @font-face {
   font-family: "thunder";
-  src: url("/public/thunderile-font-1728110210-0/Thunderile-Regular-BF66e92b2163095.ttf")
+  src: url("/thunderile-font-1728110210-0/Thunderile-Regular-BF66e92b2163095.ttf")
     format("truetype");
 }
 
 @font-face {
   font-family: "caelia";
-  src: url("./caelia-font-family-1727594684-0/CaeliaDemo-Medium-BF66f646de2df91.otf")
+  src: url("/caelia-font-family-1727594684-0/CaeliaDemo-Medium-BF66f646de2df91.otf")
     format("opentype");
 }
 
 @font-face {
   font-family: "caleb";
-  src: url("./cs-caleb-mono-font-1728128449-0/CSCalebMono-Regular_demo-BF66fdfdb41c984.otf")
+  src: url("/cs-caleb-mono-font-1728128449-0/CSCalebMono-Regular_demo-BF66fdfdb41c984.otf")
     format("opentype");
 }
 
 @font-face {
   font-family: "nano";
-  src: url("./nano-pix-font-1728128434-0/NanoPixDEMO-Regular-BF669a1c8063433.ttf")
+  src: url("/nano-pix-font-1728128434-0/NanoPixDEMO-Regular-BF669a1c8063433.ttf")
     format("truetype");
 }
 
 @font-face {
   font-family: "origami";
-  src: url("./origamet-hamida-font-1728129179-0/Origamet-Hamida-BF657c165192d21.otf")
+  src: url("/origamet-hamida-font-1728129179-0/Origamet-Hamida-BF657c165192d21.otf")
     format("opentype");
 }

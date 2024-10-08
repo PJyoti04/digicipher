@@ -7,6 +7,8 @@ import Navbar from "../utils/Navbar";
 // import { useDisclosure } from "@chakra-ui/react";
 import ReturnModal from "../utils/ReturnModal";
 import Footer from "../utils/Footer";
+import { MdOutlineCancel } from "react-icons/md";
+
 
 const Classic = () => {
   const [input, setInput] = useState([[], [], [], []]);
@@ -299,6 +301,7 @@ const Classic = () => {
             ref={ins}
             className="h-[200px] w-[90%] absolute z-50 top-[22vh] right-6 flex flex-col gap-3 p-5 rounded-lg shadow-2xl border-2 border-black bg-white bg-opacity-70 backdrop-blur-xl"
           >
+            {/* <MdOutlineCancel size={'20px'} color="black"/> */}
             <h1 className="font-bold font-audiowide text-[23px]">
               Instructions
             </h1>
