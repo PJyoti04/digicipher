@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import Navbar from "../utils/Navbar";
 // import { useDisclosure } from "@chakra-ui/react";
 import ResultModal from "../utils/ResultModal";
+import ReturnModal from "../utils/ReturnModal";
 import Footer from "../utils/Footer";
 // import { MdOutlineCancel } from "react-icons/md";
 
@@ -132,8 +133,8 @@ const Classic = () => {
         digits.push(randomDigit);
       }
     }
-    console.log(digits.join(""));
-    
+    // console.log(digits.join(""));
+
     return digits.join("");
   };
 
@@ -159,6 +160,23 @@ const Classic = () => {
   const handleCloseModal = () => {
     setPlayAgain(false);
   };
+
+  // Handle browser back button
+  useEffect(() => {
+    const handlePopState = (event) => {
+      event.peventDefault()
+      setShowModal(true);
+      window.history.pushState(null, null, window.location.pathname);
+    };
+
+    window.history.pushState(null, null, window.location.pathname);
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, []);
 
   return (
     <div
@@ -304,9 +322,19 @@ const Classic = () => {
             isOpen={true}
             onClose={handleCloseModal} // Pass function to close modal
             onConfirm={() => nav("/")}
-            onPlay={ () => {resetGame()}}
+            onPlay={() => {
+              resetGame();
+            }}
             win={win}
             randnum={randomNum}
+          />
+        )}
+
+        {showModal && (
+          <ReturnModal
+            isOpen={true}
+            onClose={handleCloseModal} // Pass function to close modal
+            onConfirm={() => nav("/")} // Navigate to another route on confirmation
           />
         )}
 
