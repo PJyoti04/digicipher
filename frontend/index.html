@@ -12,12 +12,81 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+  
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fira Code', monospace;
+      background-color: #282c34;
+      color: white;
+    }
+    
+    .fullscreen-overlay {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 9999;
+    }
 
+    button {
+      padding: 15px 30px;
+      background-color: #61dafb;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2em;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #21a1f1;
+    }
+  </style>
 </head>
 
 <body>
-  <div id="root"></div>
+  <div class="fullscreen-overlay" id="fullscreen-overlay">
+    <h1>Welcome to Vite + React</h1>
+    <button onclick="startApp()">Start in Fullscreen</button>
+  </div>
+
+  <div id="root" style="display:none;"></div>
+
   <script type="module" src="/src/main.jsx"></script>
+  <script>
+    // Function to request fullscreen
+    function openFullscreen() {
+      const elem = document.documentElement; // Root HTML element
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) { // Firefox
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { // IE/Edge
+        elem.msRequestFullscreen();
+      }
+    }
+
+    // Function to start the app and go fullscreen
+    function startApp() {
+      openFullscreen(); // Request fullscreen
+      document.getElementById('fullscreen-overlay').style.display = 'none'; // Hide the overlay
+      document.getElementById('root').style.display = 'block'; // Show the app content
+    }
+  </script>
 </body>
 
 </html>
