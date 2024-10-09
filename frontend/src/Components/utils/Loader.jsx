@@ -41,7 +41,7 @@ const Loader = () => {
   return (
     <div
       ref={home}
-      className="h-[100vh] w-full bg-black flex justify-center items-center"
+      className="h-[100vh] w-[100vw] bg-black flex justify-center items-center"
     >
       <div className="font-mono text-6xl text-white flex flex-col h-[100px] w-[250px] justify-center overflow-hidden">
         <div className="flex">

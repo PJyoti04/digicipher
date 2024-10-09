@@ -180,8 +180,8 @@ const Classic = () => {
 
   return (
     <div
-      className="h-[100vh] w-full flex gap-5 flex-col items-center bg-black"
-      style={{ backgroundImage: "url('./bg.svg')", backgroundSize: "cover" }}
+      className="h-[100vh] w-[100vw] flex gap-5 flex-col items-center bg-black"
+      style={{ backgroundImage: "url('./bg.svg')", backgroundSize: "cover"}}
       // style={{
       //   backgroundImage:
       //     "linear-gradient(to right top, #b3e0e8, #a4c8d6, #95b1c4, #88a1b1, #7a8b9e, #748a8d, #708c8b, #6c8e88, #66909c, #7aa2ab, #8fb3ba, #a6c4c9)",

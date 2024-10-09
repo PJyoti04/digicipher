@@ -49,13 +49,13 @@ const Home = () => {
 
   return (
     <div
-      className="bg-black flex flex-col"
+      className="bg-black w-[100vw] flex flex-col"
       style={{
         backgroundImage: "url('./bg.svg')",
         backgroundSize: "cover",
       }}
     >
-      <div className="h-full w-full bg-opacity-20 backdrop-blur-sm">
+      <div className="h-full w-[100vw] bg-opacity-20 backdrop-blur-sm">
         <Navbar showNav={true} />
         <div className="h-[82vh] w-full flex items-center flex-col gap-8">
           <p
