@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap" rel="stylesheet">
-  
+
   <style>
     body, html {
       height: 100%;
@@ -60,13 +60,12 @@
 <body>
   <div class="fullscreen-overlay" id="fullscreen-overlay">
     <h1>Welcome to Vite + React</h1>
-    <button onclick="startApp()">Start in Fullscreen</button>
+    <p>Click anywhere or press any key to start in fullscreen</p>
   </div>
 
   <div id="root" style="display:none;"></div>
 
-  <script type="module" src="/src/main.jsx"></script>
-  <script>
+  <script type="module">
     // Function to request fullscreen
     function openFullscreen() {
       const elem = document.documentElement; // Root HTML element
@@ -86,7 +85,21 @@
       openFullscreen(); // Request fullscreen
       document.getElementById('fullscreen-overlay').style.display = 'none'; // Hide the overlay
       document.getElementById('root').style.display = 'block'; // Show the app content
+      
+      // Dynamically load the React app after user interaction
+      import('/src/main.jsx')
+        .then((module) => {
+          // React app is started automatically from the main.jsx file
+          console.log("App started in fullscreen mode.");
+        })
+        .catch((err) => {
+          console.error("Failed to load the React app", err);
+        });
     }
+
+    // Event listeners for any click or key press
+    window.addEventListener('click', startApp);
+    window.addEventListener('keydown', startApp);
   </script>
 </body>
 
