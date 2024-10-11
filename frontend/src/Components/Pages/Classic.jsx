@@ -2,13 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useNavigate } from "react-router-dom";
 import { useGSAP } from "@gsap/react";
-// import {ArrowBackIcon} from "@chakra-ui/icons"
 import Navbar from "../utils/Navbar";
-// import { useDisclosure } from "@chakra-ui/react";
 import ResultModal from "../utils/ResultModal";
 import ReturnModal from "../utils/ReturnModal";
 import Footer from "../utils/Footer";
-// import { MdOutlineCancel } from "react-icons/md";
+import { MdOutlineCancel } from "react-icons/md";
 
 const Classic = () => {
   const [input, setInput] = useState([[], [], [], []]);
@@ -21,13 +19,11 @@ const Classic = () => {
   const [isGuessed, setIsGuessed] = useState(false);
   const [instructions, setInstructions] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  // const { isOpen, onOpen, onClose } = useDisclosure()
 
-  // const gridRefs = useRef([]);
-  // const numRefs = useRef([]);
   const nav = useNavigate();
   const container = useRef([]);
   const ins = useRef();
+  const cross = useRef();
 
   useGSAP(() => {
     gsap.from(ins.current, {
@@ -37,44 +33,14 @@ const Classic = () => {
     });
   }, [instructions]);
 
-  //Animation-01
-  // useGSAP(() => {
-  //   const timeline = gsap.timeline();
-  //   timeline.from(container.current[0], {
-  //     scale:0,
-  //     x:800,
-  //     duration: 0.35,
-  //     opacity: 0,
-  //     stagger:0.2
-  //   });
-  //   timeline.from(container.current[1], {
-  //     scale:0,
-  //     x:-800,
-  //     duration: 0.35,
-  //     opacity: 0,
-  //     stagger:0.2
-  //   });
-  //   timeline.from(container.current[2], {
-  //     scale:0,
-  //     x:800,
-  //     duration: 0.35,
-  //     opacity: 0,
-  //     stagger:0.2
-  //   });
-  // }, []);
-  //--------------------
-
-  //Animation-02
+  // Animation for page load
   useGSAP(() => {
-    // const timeline = gsap.timeline();
     gsap.from(container.current, {
       scaleX: 0,
       duration: 0.5,
       opacity: 0,
-      // stagger:0.2
     });
   });
-  //--------------------
 
   const handleKeyClick = (key) => {
     if (key === "Delete") {
@@ -122,7 +88,6 @@ const Classic = () => {
 
   useEffect(() => {
     setRandomNum(generateNumber());
-    // console.log(randomNum);
   }, []);
 
   const generateNumber = () => {
@@ -133,8 +98,6 @@ const Classic = () => {
         digits.push(randomDigit);
       }
     }
-    // console.log(digits.join(""));
-
     return digits.join("");
   };
 
@@ -149,7 +112,6 @@ const Classic = () => {
   };
 
   const showInstructions = () => {
-    console.log(instructions);
     setInstructions(!instructions);
   };
 
@@ -161,10 +123,20 @@ const Classic = () => {
     setPlayAgain(false);
   };
 
+  // Animate instructions closing and hide them
+  const animateCross = () => {
+    gsap.to(ins.current, {
+      scaleX: 0,
+      scaleY: 0,
+      duration: 0.4,
+      onComplete: () => setInstructions(false),
+    });
+  };
+
   // Handle browser back button
   useEffect(() => {
     const handlePopState = (event) => {
-      event.peventDefault()
+      event.preventDefault();
       setShowModal(true);
       window.history.pushState(null, null, window.location.pathname);
     };
@@ -181,11 +153,7 @@ const Classic = () => {
   return (
     <div
       className="h-[100vh] w-[100vw] flex gap-5 flex-col items-center bg-black"
-      style={{ backgroundImage: "url('./bg.svg')", backgroundSize: "cover"}}
-      // style={{
-      //   backgroundImage:
-      //     "linear-gradient(to right top, #b3e0e8, #a4c8d6, #95b1c4, #88a1b1, #7a8b9e, #748a8d, #708c8b, #6c8e88, #66909c, #7aa2ab, #8fb3ba, #a6c4c9)",
-      // }}
+      style={{ backgroundImage: "url('./bg.svg')", backgroundSize: "cover" }}
     >
       <div className="h-full w-full bg-opacity-20 backdrop-blur-sm flex flex-col items-center gap-8">
         <div className="w-full h-[10%] p-2">
@@ -213,6 +181,7 @@ const Classic = () => {
           </button>
         </div>
 
+        {/* Game Board */}
         <div
           ref={(el) => (container.current[1] = el)}
           className="h-[35%] w-[75%]"
@@ -222,7 +191,6 @@ const Classic = () => {
               <div
                 key={index}
                 style={{ fontFamily: "origami" }}
-                // ref={(el) => (gridRefs.current[index] = el)} // Attach each box to refs array
                 className={`h-full w-full rounded-xl flex items-center justify-center text-5xl ${getBgColor(
                   digit,
                   index % 4
@@ -235,9 +203,6 @@ const Classic = () => {
             {currentInput.map((digit, index) => (
               <div
                 key={index + input.flat().length}
-                // ref={(el) =>
-                //   (gridRefs.current[input.flat().length + index] = el)
-                // }
                 style={{ fontFamily: "origami" }}
                 className="h-full w-full bg-white border-2 border-white rounded-2xl flex items-center justify-center text-5xl text-white backdrop-blur-3xl bg-opacity-15"
               >
@@ -249,11 +214,6 @@ const Classic = () => {
               (_, index) => (
                 <div
                   key={`empty-${index}`}
-                  // ref={(el) =>
-                  //   (gridRefs.current[
-                  //     input.flat().length + currentInput.length + index
-                  //   ] = el)
-                  // }
                   style={{ fontFamily: "lunar" }}
                   className="h-full w-full bg-white border-2 border-white rounded-2xl flex items-center justify-center text-4xl backdrop-blur-3xl bg-opacity-15"
                 ></div>
@@ -283,7 +243,6 @@ const Classic = () => {
               "Enter",
             ].map((key, index) => (
               <button
-                // ref={(el) => (numRefs.current[index] = el)} // Corrected reference to use index
                 key={key}
                 className="h-full w-full bg-black border-2 border-green-500 text-green-400 flex justify-center items-center text-3xl rounded-2xl"
                 style={{ fontFamily: "lunar" }}
@@ -295,32 +254,10 @@ const Classic = () => {
           </div>
         </div>
 
-        {/* Play Again */}
-        {/* {playAgain && (
-          <div className="h-[100vh] w-[100%] absolute gap-4 flex-col font-pressStart bg-white bg-opacity-20 backdrop-blur-lg flex justify-center items-center">
-            <h1 className="text-7xl">
-              {win ? (
-                "You Won"
-              ) : (
-                <div className="text-4xl font-pressStart text-center">
-                  Correct Number is {randomNum}
-                </div>
-              )}
-            </h1>
-
-            <button
-              className="bg-blue-500 text-white font-pressStart h-[12vh] w-[40%] text-2xl rounded-2xl"
-              onClick={resetGame}
-            >
-              Play Again
-            </button>
-          </div>
-        )} */}
-
         {playAgain && (
           <ResultModal
             isOpen={true}
-            onClose={handleCloseModal} // Pass function to close modal
+            onClose={handleCloseModal}
             onConfirm={() => nav("/")}
             onPlay={() => {
               resetGame();
@@ -333,8 +270,8 @@ const Classic = () => {
         {showModal && (
           <ReturnModal
             isOpen={true}
-            onClose={handleCloseModal} // Pass function to close modal
-            onConfirm={() => nav("/")} // Navigate to another route on confirmation
+            onClose={handleCloseModal}
+            onConfirm={() => nav("/")}
           />
         )}
 
@@ -342,25 +279,52 @@ const Classic = () => {
         {instructions && (
           <div
             ref={ins}
-            className="h-[200px] w-[90%] absolute z-50 top-[22vh] right-6 flex flex-col gap-3 p-5 rounded-lg shadow-2xl border-2 border-black bg-white bg-opacity-70 backdrop-blur-xl"
+            className="h-max w-[90%] absolute z-50 top-[22vh] right-6 flex flex-col gap-3 p-5 rounded-lg shadow-2xl border-2 border-black bg-white bg-opacity-100 backdrop-blur-xl"
           >
-            {/* <MdOutlineCancel size={'20px'} color="black"/> */}
+            <div className="absolute right-2">
+              <MdOutlineCancel
+                ref={cross}
+                className="h-[28px] w-[28px] text-black cursor-pointer"
+                onClick={animateCross}
+              />
+            </div>
             <h1 className="font-bold font-audiowide text-[23px]">
               Instructions
             </h1>
             <p className="font-bold font-orbitron text-sm text-black">
-              1. Guess the 4 digit code.
+              1. Guess the 4-digit number with unique digits.
             </p>
             <p className="font-bold font-orbitron text-sm text-black">
-              2. Use the numbers to guess.
+              2. Use the numbers to make your guess.
             </p>
             <p className="font-bold font-orbitron text-sm text-black">
-              3. Press 'Del.' to delete and 'Ent.' to confirm your guess.
+              3. After each guess, the background color will change based on
+              your input:
+            </p>
+            <div className="font-bold font-orbitron text-sm text-black list-disc list-inside ml-5">
+              <li className="flex items-center gap-2">
+                <p className="h-[20px] w-[30px] bg-green-600"></p>
+                The digit is correct and in the correct position.
+              </li>
+              <li className="flex items-center gap-2">
+                <p className="h-[20px] w-[30px] bg-yellow-300"></p>
+                The digit is correct but in the wrong position.
+              </li>
+              <li className="flex items-center gap-2">
+                <p className="h-[20px] w-[23px] bg-red-600"></p>
+                The digit is not part of the number.
+              </li>
+            </div>
+            <p className="font-bold font-orbitron text-sm text-black">
+              4. Press 'Del.' to delete and 'Ent.' to confirm your guess.
+            </p>
+            <p className="font-bold font-orbitron text-sm text-black">
+              5. You have 4 chances to guess the correct number.
             </p>
           </div>
         )}
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 };

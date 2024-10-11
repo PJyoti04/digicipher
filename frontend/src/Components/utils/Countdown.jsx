@@ -6,8 +6,7 @@ const Countdown = ({ setStart }) => {
 
   const handleStart = () => {
     gsap.to(btnRef.current[0], {
-      x: -100,
-      y: -440,
+      x: -300,
       duration: 1,
       opacity: 0,
       onComplete: () => {
@@ -16,8 +15,7 @@ const Countdown = ({ setStart }) => {
     });
 
     gsap.to(btnRef.current[1],{
-        x:100,
-        y:-440,
+        x:300,
         duration:1,
         opacity:0,
     })
