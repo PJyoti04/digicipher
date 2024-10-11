@@ -1,18 +1,19 @@
-import React, { useRef,useState } from "react";
+import React, { useRef, useState } from "react";
 import User from "./Avatar";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Link } from "react-router-dom";
 import { FaGithub } from "react-icons/fa6";
+import { FaArrowLeft } from "react-icons/fa";
 import { FaHouseChimney } from "react-icons/fa6";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ReturnModal from "./ReturnModal";
 
-const Navbar = ({showNav}) => {
+const Navbar = ({ showNav,back }) => {
   const ref2 = useRef();
   const [showModal, setShowModal] = useState(false);
   // const [showNav,setShowNav] = useState(true)
-  const nav = useNavigate()
+  const nav = useNavigate();
 
   useGSAP(() => {
     gsap.from(ref2.current, {
@@ -27,39 +28,58 @@ const Navbar = ({showNav}) => {
   // };
 
   const handleBackClick = () => {
-    setShowModal(true)
-  }
+    setShowModal(true);
+  };
 
   const handleCloseModal = () => {
     setShowModal(false);
   };
-  // const i = false;
+  // const i = true;
   return (
     <>
-    <div className="h-[9vh] w-full flex justify-center items-center">
-      {showNav && (
-        <div
-          ref={ref2}
-          className="h-[100%] w-[100%] px-4 flex justify-between items-center rounded-br-3xl rounded-bl-3xl "
-        >
-          <div className="h-full w-full flex items-center justify-between">
-            <Link to="https://github.com/KC1064/open_the_vault" target="_blank">
-              <FaGithub size={"29px"} color="white" />
-            </Link>
+      <div className="h-[9vh] w-full flex justify-center items-center">
+        {showNav && (
+          <div
+            ref={ref2}
+            className="h-[100%] w-[100%] px-4 flex justify-between items-center rounded-br-3xl rounded-bl-3xl "
+          >
+            <div className="h-full w-full flex items-center justify-between">
+              <Link
+                to="https://github.com/KC1064/open_the_vault"
+                target="_blank"
+              >
+                <FaGithub size={"29px"} color="white" />
+              </Link>
+              <User />
+            </div>
+          </div>
+        )}
+        {!showNav && (
+          <div className="h-[100%] w-[100%] px-4 flex justify-between items-center">
+            {back ? (
+              <FaArrowLeft color="white" cursor="pointer" onClick={() => {nav("/")}}/>
+            ) : (
+              <FaHouseChimney
+                color="white"
+                size={"25px"}
+                onClick={() => {
+                  handleBackClick();
+                }}
+              />
+            )}
+          
+            <div
+              className="text-emerald-300 text-5xl mt-2"
+              style={{ fontFamily: "pixel", color: "" }}
+            >
+              DIGICIPHER
+            </div>
             <User />
           </div>
-        </div>
-      )}
-      {!showNav && (
-        <div className="h-[100%] w-[100%] px-4 flex justify-between items-center">
-          <FaHouseChimney color="white" size={"25px"} onClick={() => {handleBackClick()}}/>
-          <div className="text-emerald-300 text-5xl mt-2" style={{fontFamily:"pixel",color:""}}>DIGICIPHER</div>
-          <User />
-        </div>
-      )}
-    </div>
-    
-    {showModal && (
+        )}
+      </div>
+
+      {showModal && (
         <ReturnModal
           isOpen={showModal}
           onClose={handleCloseModal} // Pass function to close modal

@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vite + React</title>
+  <title>Digicipher</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Bungee&display=swap" rel="stylesheet">
@@ -59,8 +59,8 @@
 
 <body>
   <div class="fullscreen-overlay" id="fullscreen-overlay">
-    <h1>Welcome to Vite + React</h1>
-    <p>Click anywhere or press any key to start in fullscreen</p>
+    <h1><span style="color: transparent;background-image: linear-gradient(to right,blue,white,red);background-clip: text;">Welcome to Digicipher</span></h1>
+    <p>Tap To Continue</p>
   </div>
 
   <div id="root" style="display:none;"></div>
@@ -82,7 +82,7 @@
 
     // Function to start the app and go fullscreen
     function startApp() {
-      // openFullscreen(); // Request fullscreen
+      openFullscreen(); // Request fullscreen
       document.getElementById('fullscreen-overlay').style.display = 'none'; // Hide the overlay
       document.getElementById('root').style.display = 'block'; // Show the app content
       
@@ -95,9 +95,13 @@
         .catch((err) => {
           console.error("Failed to load the React app", err);
         });
+
+      // Remove event listeners after first interaction
+      window.removeEventListener('click', startApp);
+      window.removeEventListener('keydown', startApp);
     }
 
-    // Event listeners for any click or key press
+    // Add event listeners for first click or key press
     window.addEventListener('click', startApp);
     window.addEventListener('keydown', startApp);
   </script>

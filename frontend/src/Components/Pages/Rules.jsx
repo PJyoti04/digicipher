@@ -9,7 +9,7 @@ const Rules = () => {
       style={{ backgroundImage: "url('./bg.svg')", backgroundSize: "cover" }}
     >
       <div className="h-full w-full bg-opacity-20 backdrop-blur-sm flex flex-col items-center gap-8">
-        <Navbar></Navbar>
+        <Navbar back = {true}></Navbar>
         <div className='h-[80vh]'></div>
         <Footer></Footer>
       </div>
