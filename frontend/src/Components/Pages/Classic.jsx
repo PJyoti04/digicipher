@@ -115,11 +115,11 @@ const Classic = () => {
     setInstructions(!instructions);
   };
 
-  const handleBackClick = () => {
-    setShowModal(true);
+  const handleCloseModal = () => {
+    setShowModal(false);
   };
 
-  const handleCloseModal = () => {
+  const handlePlayAgain = () => {
     setPlayAgain(false);
   };
 
@@ -257,7 +257,7 @@ const Classic = () => {
         {playAgain && (
           <ResultModal
             isOpen={true}
-            onClose={handleCloseModal}
+            onClose={handlePlayAgain}
             onConfirm={() => nav("/")}
             onPlay={() => {
               resetGame();
@@ -323,8 +323,8 @@ const Classic = () => {
             </p>
           </div>
         )}
-      </div>
       <Footer />
+      </div>
     </div>
   );
 };

@@ -5,16 +5,14 @@ import Footer from "../utils/Footer";
 const About = () => {
   return (
     <div
-      style={{
-        backgroundImage: "url('./bg.svg')",
-        backgroundSize: "cover",
-      }}
-      className="h-[100vh] w-full"
+      className="h-[100vh] w-[100vw] flex gap-5 flex-col items-center bg-black"
+      style={{ backgroundImage: "url('./bg.svg')", backgroundSize: "cover" }}
     >
-      <Navbar />
-      <div className="h-[82vh] px-3 py-3">
+      <div className="h-full w-full bg-opacity-20 backdrop-blur-sm flex flex-col items-center gap-8">
+        <Navbar back = {true}></Navbar>
+        <div className='h-[80vh]'></div>
+        <Footer></Footer>
       </div>
-      <Footer />
     </div>
   );
 };
