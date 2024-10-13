@@ -15,7 +15,7 @@ const Classic = () => {
   const [randomNum, setRandomNum] = useState("");
   const [isMatch, setIsMatch] = useState(false);
   const [playAgain, setPlayAgain] = useState(false);
-  const [win, setWin] = useState(false);
+  const [win, setWin] = useState(3);
   const [isGuessed, setIsGuessed] = useState(false);
   const [instructions, setInstructions] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -29,7 +29,7 @@ const Classic = () => {
     gsap.from(ins.current, {
       scaleX: 0,
       scaleY: 0,
-      duration: 0.8,
+      duration: 0.5,
       ease: "back.out(1)",
     });
   }, [instructions]);
@@ -56,7 +56,7 @@ const Classic = () => {
         if (currentInput.join("") === randomNum) {
           setIsMatch(true);
           setIsGuessed(true);
-          setWin(true);
+          setWin(0);
           setPlayAgain(true);
         } else {
           setIsMatch(false);
@@ -65,7 +65,7 @@ const Classic = () => {
           } else {
             setPlayAgain(true);
             setIsGuessed(true);
-            setWin(false);
+            setWin(3);
           }
         }
       } else {
@@ -82,7 +82,7 @@ const Classic = () => {
     setCurrentInput([]);
     setIsMatch(false);
     setPlayAgain(false);
-    setWin(false);
+    setWin(3);
     setIsGuessed(false);
     setRandomNum(generateNumber());
   };

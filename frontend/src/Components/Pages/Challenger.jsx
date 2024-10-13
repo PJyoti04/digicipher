@@ -12,6 +12,7 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  background,
 } from "@chakra-ui/react";
 import { PinInput, PinInputField, HStack } from "@chakra-ui/react";
 import Countdown from "../utils/Countdown";
@@ -22,8 +23,10 @@ import { MdOutlineCancel } from "react-icons/md";
 
 const Challenger = () => {
   const [start, setStart] = useState(true);
-  const [win, setWin] = useState(false);
+  const [win, setWin] = useState(1);
   const [result, setResult] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const [randomNum, setRandomNum] = useState("");
   const [guess, setGuess] = useState([]); // State to store guesses
   const [guessCount, setGuessCount] = useState(0); // Keep track of the number of guesses
@@ -42,7 +45,7 @@ const Challenger = () => {
     gsap.from(ins.current, {
       scaleX: 0,
       scaleY: 0,
-      duration: 0.8,
+      duration: 0.5,
       ease: "back.out(1)",
     });
   }, [showInstructions]);
@@ -118,7 +121,9 @@ const Challenger = () => {
 
       if (positionMatches === 4 && digitMatches === 4) {
         setResult(true);
-        setWin(true);
+        setWin(0);
+        setIsPaused(true);
+        setIsDisabled(true)
       }
 
       setGuess((prevGuesses) => [
@@ -141,11 +146,13 @@ const Challenger = () => {
   //Reseting mode
   const resetGame = () => {
     setStart(true);
-    setWin(false);
+    setWin(1);
     setResult(false);
     setGuessCount(0);
     setGuess([]);
     setPinValue("");
+    setIsPaused(false);
+    setIsDisabled(false);
     guessRows.current = []; // Clear guess rows refs
     table.current = [];
     console.log("Resetting game");
@@ -211,6 +218,18 @@ const Challenger = () => {
     setResult(false);
   };
 
+  const handleGiveUp = () => {
+    setResult(true);
+    setWin(2)
+  }
+
+  const handleExpire = () => {
+    setResult(true);
+    setWin(1)
+    setIsDisabled(true); // Disable input if time expires
+    setIsPaused(true);   // Pause timer or game when expired
+  };
+
   return (
     <div
       className="h-[100vh] w-[100vw] flex gap-5 flex-col items-center bg-black"
@@ -220,7 +239,9 @@ const Challenger = () => {
         <Navbar />
         <div className="h-[84vh] w-full px-4 flex flex-col gap-5">
           {start ? (
-            <Countdown setStart={setStart} />
+            <Countdown setStart={setStart}  onPress={() => {
+              setShowinstructions(true)
+            }} />
           ) : (
             <>
               <div className="h-[6vh] w-[100%] flex justify-between items-center text-white px-3">
@@ -228,7 +249,8 @@ const Challenger = () => {
                   ref={timer}
                   className="px-4 py-1 text-lg font-bold rounded-lg bg-slate-400"
                 >
-                  <Timer expiryTimestamp={expiryTimestamp} />
+                  <Timer expiryTimestamp={expiryTimestamp} isPaused={isPaused}
+                  onExpire={() => {handleExpire()}} />
                 </h1>
                 <h1
                   onClick={() => setShowinstructions(true)}
@@ -250,6 +272,7 @@ const Challenger = () => {
                     value={pinValue}
                     onChange={(value) => setPinValue(value)}
                     onKeyDown={handleKeyDown}
+                    isDisabled={isDisabled}
                   >
                     <PinInputField color={"white"} />
                     <PinInputField color={"white"} />
@@ -297,12 +320,19 @@ const Challenger = () => {
                 className="w-full flex flex-col items-center gap-4 justify-center"
               >
                 <button
-                  className="text-white bg-green-600 h-max w-[70%] px-2 py-1 uppercase text-xl font-bold rounded-lg"
+                  className={`text-white bg-green-600 h-max w-[70%] px-2 py-1 uppercase text-xl font-bold rounded-lg 
+                  ${
+                      pinValue.length !== 4
+                        ? "bg-gray-400"
+                        : "bg-blue-500"
+                    }`}
                   onClick={handleGuessSubmit}
+                  disabled={pinValue.length !== 4}
                 >
                   Enter
                 </button>
-                <button className="text-white bg-red-400 h-max w-[70%] px-2 py-1 uppercase text-xl font-bold rounded-lg">
+                <button className="text-white bg-red-400 h-max w-[70%] px-2 py-1 uppercase text-xl font-bold rounded-lg"
+                onClick={handleGiveUp}>
                   Give Up
                 </button>
               </div>
@@ -325,52 +355,53 @@ const Challenger = () => {
         {showInstructions ? (
           <div
           ref={ins}
-            style={{ fontFamily: "Inter, sans-serif" }}
-            className="absolute top-[20%] bg-opacity-90 right-10 z-50 h-max py-2 w-[84%] bg-white px-2"
+            style={{ fontFamily: "Inter, sans-serif",overflow:"scroll" }}
+            // className="absolute top-[20%] bg-opacity-90 right-0 z-50 h-max py-2 w-[90%] bg-white px-2"
+            className="absolute z-50 top-[15%] bg-opacity-100 flex-col bg-white h-[70%] py-2 w-[95%] px-3 backdrop-blur-xl"
           >
             <MdOutlineCancel
                 ref={cross}
-                className="h-[28px] w-[28px] absolute right-5 top-3 text-black cursor-pointer"
+                className="h-[28px] w-[28px] absolute right-3 top-2 text-black cursor-pointer"
                 onClick={animateCross}
               />
-            <h1 className="font-bold font-audiowide text-3xl">
+            <h1 className="font-bold font-audiowide text-2xl py-2">
               Instructions
             </h1>
 
-            <p className="text-lg  text-black">
+            <p className="text-sm  text-black font-orbitron font-bold py-1">
               1. The computer selects a unique <strong>4-digit number</strong>,
               with no repeating digits.
             </p>
 
-            <p className="text-lg  text-black">
+            <p className="text-sm  text-black font-orbitron font-bold py-1">
               2. Your task is to guess the 4-digit code before the{" "}
               <strong>timer</strong> runs out.
             </p>
 
-            <p className="text-lg  text-black">
+            <p className="text-sm  text-black font-orbitron font-bold py-1">
               3. After each guess, the feedback is shown in a table with two
               columns:
             </p>
 
-            <ul className="list-decimal list-inside ml-6 space-y-1">
+            <ul className="list-decimal list-inside ml-6 space-y-1 text-sm  text-black font-orbitron font-bold py-1">
               <li>
-                <strong>Position:</strong> How many digits are in the correct
+                <strong className="text-green-600">Position:</strong> How many digits are in the correct
                 position.
               </li>
               <li>
-                <strong>Digits:</strong> How many of your guessed digits are
+                <strong className="text-green-600">Digits:</strong> How many of your guessed digits are
                 present in the code, regardless of position.
               </li>
             </ul>
 
-            <p className="text-lg  text-black">
+            <p className="text-sm  text-black font-orbitron font-bold py-1">
               4. You can make multiple guesses until you decipher the code or
               the timer runs out.
             </p>
 
-            <p className="text-lg  text-black">
+            <p className="text-sm  text-black font-orbitron font-bold py-1">
               5. If you feel stuck or run out of time, click the{" "}
-              <strong>'Give Up'</strong> button to restart the game.
+              <strong className="text-red-600">'Give Up'</strong> button to restart the game.
             </p>
           </div>
         ) : (

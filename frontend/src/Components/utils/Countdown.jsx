@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 
-const Countdown = ({ setStart }) => {
+const Countdown = ({ setStart,onPress }) => {
   const btnRef = useRef([]);
   const [countdown, setCountdown] = useState(3); // Initialize countdown to 3
   const [showCountdown, setShowCountdown] = useState(false); // State to control visibility of countdown
@@ -66,6 +66,7 @@ const Countdown = ({ setStart }) => {
         <button
           ref={(el) => (btnRef.current[1] = el)}
           className="font-bold w-[70%] px-4 py-2 text-black bg-yellow-300 rounded-lg text-2xl"
+          onClick={onPress}
         >
           INSTRUCTIONS
         </button>
