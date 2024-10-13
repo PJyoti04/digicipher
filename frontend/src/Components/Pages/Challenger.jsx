@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { PinInput, PinInputField, HStack } from "@chakra-ui/react";
 import Countdown from "../utils/Countdown";
+import Timer from "../utils/Timer"
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
@@ -22,10 +23,14 @@ const Challenger = () => {
   const [guess, setGuess] = useState([]); // State to store guesses
   const [guessCount, setGuessCount] = useState(0); // Keep track of the number of guesses
   const [pinValue, setPinValue] = useState(""); // State for storing current pin input value
-  const guessRows = useRef([]); // Store refs for guess rows
+  const guessRows = useRef([]); 
+  
   const table = useRef([]);
   const timer = useRef();
   const rules = useRef();
+
+  const expiryTimestamp = new Date();
+  expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + 600);
 
   // GSAP animations for guess rows
   useGSAP(() => {
@@ -165,7 +170,7 @@ const matchDigits = (guess, randomNum) => {
                   ref={timer}
                   className="px-4 py-1 text-lg font-bold rounded-lg bg-slate-400"
                 >
-                  Timer
+                  <Timer expiryTimestamp={expiryTimestamp} />
                 </h1>
                 <h1
                   ref={rules}
