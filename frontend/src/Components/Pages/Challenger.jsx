@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { PinInput, PinInputField, HStack } from "@chakra-ui/react";
 import Countdown from "../utils/Countdown";
-import Timer from "../utils/Timer"
+import Timer from "../utils/Timer";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
@@ -27,8 +27,8 @@ const Challenger = () => {
   const [guess, setGuess] = useState([]); // State to store guesses
   const [guessCount, setGuessCount] = useState(0); // Keep track of the number of guesses
   const [pinValue, setPinValue] = useState(""); // State for storing current pin input value
-  const guessRows = useRef([]); 
-  
+  const guessRows = useRef([]);
+
   const table = useRef([]);
   const timer = useRef();
   const rules = useRef();
@@ -39,7 +39,7 @@ const Challenger = () => {
 
   // GSAP animations for guess rows
   useGSAP(() => {
-    if (!start) {
+    if (!start && guessRows.current.length > 0 && guessRows.current[0]) {
       gsap.from(guessRows.current, {
         scaleX: 0,
         opacity: 0,
@@ -50,7 +50,7 @@ const Challenger = () => {
 
   // GSAP animations for the table
   useGSAP(() => {
-    if (!start) {
+    if (!start && table.current[0]) {
       gsap.from(table.current, {
         scaleX: 0,
         opacity: 0,
@@ -61,7 +61,7 @@ const Challenger = () => {
 
   // GSAP animations for the timer and rules
   useGSAP(() => {
-    if (!start) {
+    if (!start && timer.current && rules.current) {
       gsap.from(timer.current, {
         x: -300,
         opacity: 0,
@@ -76,8 +76,9 @@ const Challenger = () => {
     }
   }, [start]);
 
+  // GSAP animations for the guess row when guess is updated
   useGSAP(() => {
-    if (guess.length > 0) {
+    if (guess.length > 0 && guessRows.current[0]) {
       gsap.from(guessRows.current[0], {
         scale: 0,
         opacity: 0,
@@ -125,6 +126,7 @@ const Challenger = () => {
     setPinValue("");
     guessRows.current = []; // Clear guess rows refs
     table.current = [];
+    console.log("Resetting game");
   };
 
   // Effect to generate a random number when the game starts
@@ -306,3 +308,5 @@ const Challenger = () => {
 };
 
 export default Challenger;
+
+
