@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../utils/Navbar";
 import Footer from "../utils/Footer";
+import ResultModal from "../utils/ResultModal";
 import {
   Table,
   Thead,
@@ -18,6 +20,8 @@ import gsap from "gsap";
 
 const Challenger = () => {
   const [start, setStart] = useState(true);
+  const [win, setWin] = useState(false);
+  const [result, setResult] = useState(false);
   const [randomNum, setRandomNum] = useState("");
   const [guess, setGuess] = useState([]); // State to store guesses
   const [guessCount, setGuessCount] = useState(0); // Keep track of the number of guesses
@@ -26,6 +30,7 @@ const Challenger = () => {
   const table = useRef([]);
   const timer = useRef();
   const rules = useRef();
+  const nav = useNavigate();
 
   // GSAP animations for guess rows
   useGSAP(() => {
@@ -66,11 +71,27 @@ const Challenger = () => {
     }
   }, [start]);
 
+  useGSAP(() => {
+    if (guess.length > 0) {
+      gsap.from(guessRows.current[0], {
+        scale: 0,
+        opacity: 0,
+        duration: 0.4,
+        ease: "back.out(1.7)",
+      });
+    }
+  }, [guess]);
+
   // Handle guess submission and update state
   const handleGuessSubmit = () => {
     if (pinValue.length === 4) {
       const positionMatches = matchPosition(pinValue, randomNum);
       const digitMatches = matchDigits(pinValue, randomNum);
+
+      if (positionMatches === 4 && digitMatches === 4) {
+        setResult(true);
+        setWin(true);
+      }
 
       setGuess((prevGuesses) => [
         {
@@ -84,10 +105,21 @@ const Challenger = () => {
 
       setGuessCount(guessCount + 1); // Increment the guess counter
       setPinValue(""); // Clear the PinInput value
-    }
-    else{
+    } else {
       alert("Please enter a 4-digit number");
     }
+  };
+
+  //Reseting mode
+  const resetGame = () => {
+    setStart(true);
+    setWin(false);
+    setResult(false);
+    setGuessCount(0);
+    setGuess([]);
+    setPinValue("");
+    guessRows.current = []; // Clear guess rows refs
+    table.current = [];
   };
 
   // Effect to generate a random number when the game starts
@@ -108,24 +140,23 @@ const Challenger = () => {
     return correctPositionCount;
   };
 
- // Function to check how many digits are present in both numbers, regardless of position
-const matchDigits = (guess, randomNum) => {
-  let correctDigitCount = 0;
-  let guessDigits = guess.split("");
-  let randomDigits = randomNum.split("");
-  
-  const countedDigits = {}; // To track which digits have been counted already
+  // Function to check how many digits are present in both numbers, regardless of position
+  const matchDigits = (guess, randomNum) => {
+    let correctDigitCount = 0;
+    let guessDigits = guess.split("");
+    let randomDigits = randomNum.split("");
 
-  guessDigits.forEach((digit) => {
-    if (randomDigits.includes(digit) && !countedDigits[digit]) {
-      correctDigitCount++;
-      countedDigits[digit] = true; // Mark this digit as counted
-    }
-  });
+    const countedDigits = {}; // To track which digits have been counted already
 
-  return correctDigitCount;
-};
+    guessDigits.forEach((digit) => {
+      if (randomDigits.includes(digit) && !countedDigits[digit]) {
+        correctDigitCount++;
+        countedDigits[digit] = true; // Mark this digit as counted
+      }
+    });
 
+    return correctDigitCount;
+  };
 
   // Generate a unique random 4-digit number
   const generateNumber = () => {
@@ -137,7 +168,7 @@ const matchDigits = (guess, randomNum) => {
       }
     }
     console.log(digits.join(""));
-    
+
     return digits.join("");
   };
 
@@ -146,6 +177,10 @@ const matchDigits = (guess, randomNum) => {
     if (e.key === "Enter") {
       handleGuessSubmit();
     }
+  };
+
+  const handlePlayAgain = () => {
+    setResult(false);
   };
 
   return (
@@ -245,6 +280,20 @@ const matchDigits = (guess, randomNum) => {
             </>
           )}
         </div>
+
+        {result && (
+          <ResultModal
+            isOpen={true}
+            onClose={handlePlayAgain}
+            onConfirm={() => nav("/")}
+            onPlay={() => {
+              resetGame();
+            }}
+            win={win}
+            randnum={randomNum}
+          />
+        )}
+
         <Footer />
       </div>
     </div>
