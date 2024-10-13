@@ -29,7 +29,8 @@ const Classic = () => {
     gsap.from(ins.current, {
       scaleX: 0,
       scaleY: 0,
-      duration: 0.2,
+      duration: 0.8,
+      ease: "back.out(1)",
     });
   }, [instructions]);
 
@@ -128,7 +129,8 @@ const Classic = () => {
     gsap.to(ins.current, {
       scaleX: 0,
       scaleY: 0,
-      duration: 0.4,
+      duration: 0.6,
+      ease: "back.in(1)",
       onComplete: () => setInstructions(false),
     });
   };
@@ -323,7 +325,7 @@ const Classic = () => {
             </p>
           </div>
         )}
-      <Footer />
+        <Footer />
       </div>
     </div>
   );
