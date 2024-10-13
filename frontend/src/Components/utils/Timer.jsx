@@ -1,10 +1,10 @@
 import React from "react";
 import { useTimer } from "react-timer-hook";
 
-const Timer = () => {
+const Timer = ({isPaused,onExpire}) => {
   // Define expiryTimestamp when the component mounts
   const time = new Date();
-  time.setSeconds(time.getSeconds() + 600); // Set to 5 minutes from now
+  time.setSeconds(time.getSeconds() + 360); // Set to 5 minutes from now
   const expiryTimestamp = time;
 
   // useTimer hook initialization
@@ -20,8 +20,18 @@ const Timer = () => {
     restart,
   } = useTimer({
     expiryTimestamp,
-    onExpire: () => console.warn("Timer has expired!"),
+    onExpire : () => {console.warn("Timer has expired!");
+      onExpire();
+    },
   });
+  // const i = true
+  React.useEffect(() => {
+    if(isPaused){
+      pause()
+    }else{
+      resume()
+    }
+  },[isPaused])
 
   return (
     <div className="text-white"
@@ -30,6 +40,7 @@ const Timer = () => {
         <span>{minutes}</span>:
         <span>{seconds}</span>
       </div>
+      {/* {i ? () => {pause}:{resume}} */}
       {/* <p>{isRunning ? "Running" : "Not running"}</p>
       <button onClick={start}>Start</button>
       <button onClick={pause}>Pause</button>
