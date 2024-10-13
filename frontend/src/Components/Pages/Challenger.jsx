@@ -15,9 +15,10 @@ import {
 } from "@chakra-ui/react";
 import { PinInput, PinInputField, HStack } from "@chakra-ui/react";
 import Countdown from "../utils/Countdown";
-import Timer from "../utils/Timer"
+import Timer from "../utils/Timer";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import { MdOutlineCancel } from "react-icons/md";
 
 const Challenger = () => {
   const [start, setStart] = useState(true);
@@ -26,20 +27,41 @@ const Challenger = () => {
   const [randomNum, setRandomNum] = useState("");
   const [guess, setGuess] = useState([]); // State to store guesses
   const [guessCount, setGuessCount] = useState(0); // Keep track of the number of guesses
-  const [pinValue, setPinValue] = useState(""); // State for storing current pin input value
-  const guessRows = useRef([]); 
-  
+  const [pinValue, setPinValue] = useState("");
+  const [showInstructions, setShowinstructions] = useState(false);
+  const guessRows = useRef([]);
+
   const table = useRef([]);
   const timer = useRef();
   const rules = useRef();
   const nav = useNavigate();
+  const ins = useRef();
+  const cross = useRef();
+
+  useGSAP(() => {
+    gsap.from(ins.current, {
+      scaleX: 0,
+      scaleY: 0,
+      duration: 0.8,
+      ease: "back.out(1)",
+    });
+  }, [showInstructions]);
+
+  const animateCross = () => {
+    gsap.to(ins.current, {
+      scaleX: 0,
+      scaleY: 0,
+      duration: 0.6,
+      ease: "back.in(1)",
+      onComplete: () => setShowinstructions(false),
+    });
+  };
 
   const expiryTimestamp = new Date();
   expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + 600);
 
-  // GSAP animations for guess rows
   useGSAP(() => {
-    if (!start) {
+    if (!start && guessRows.current.length > 0 && guessRows.current[0]) {
       gsap.from(guessRows.current, {
         scaleX: 0,
         opacity: 0,
@@ -50,7 +72,7 @@ const Challenger = () => {
 
   // GSAP animations for the table
   useGSAP(() => {
-    if (!start) {
+    if (!start && table.current[0]) {
       gsap.from(table.current, {
         scaleX: 0,
         opacity: 0,
@@ -61,7 +83,7 @@ const Challenger = () => {
 
   // GSAP animations for the timer and rules
   useGSAP(() => {
-    if (!start) {
+    if (!start && timer.current && rules.current) {
       gsap.from(timer.current, {
         x: -300,
         opacity: 0,
@@ -76,8 +98,9 @@ const Challenger = () => {
     }
   }, [start]);
 
+  // GSAP animations for the guess row when guess is updated
   useGSAP(() => {
-    if (guess.length > 0) {
+    if (guess.length > 0 && guessRows.current[0]) {
       gsap.from(guessRows.current[0], {
         scale: 0,
         opacity: 0,
@@ -125,9 +148,9 @@ const Challenger = () => {
     setPinValue("");
     guessRows.current = []; // Clear guess rows refs
     table.current = [];
+    console.log("Resetting game");
   };
 
-  // Effect to generate a random number when the game starts
   useEffect(() => {
     if (!start) {
       setRandomNum(generateNumber());
@@ -208,6 +231,7 @@ const Challenger = () => {
                   <Timer expiryTimestamp={expiryTimestamp} />
                 </h1>
                 <h1
+                  onClick={() => setShowinstructions(true)}
                   ref={rules}
                   className="flex justify-center items-center bg-white text-black w-10 h-10 rounded-full text-4xl"
                 >
@@ -297,6 +321,60 @@ const Challenger = () => {
             win={win}
             randnum={randomNum}
           />
+        )}
+        {showInstructions ? (
+          <div
+          ref={ins}
+            style={{ fontFamily: "Inter, sans-serif" }}
+            className="absolute top-[20%] bg-opacity-90 right-10 z-50 h-max py-2 w-[84%] bg-white px-2"
+          >
+            <MdOutlineCancel
+                ref={cross}
+                className="h-[28px] w-[28px] absolute right-5 top-3 text-black cursor-pointer"
+                onClick={animateCross}
+              />
+            <h1 className="font-bold font-audiowide text-3xl">
+              Instructions
+            </h1>
+
+            <p className="text-lg  text-black">
+              1. The computer selects a unique <strong>4-digit number</strong>,
+              with no repeating digits.
+            </p>
+
+            <p className="text-lg  text-black">
+              2. Your task is to guess the 4-digit code before the{" "}
+              <strong>timer</strong> runs out.
+            </p>
+
+            <p className="text-lg  text-black">
+              3. After each guess, the feedback is shown in a table with two
+              columns:
+            </p>
+
+            <ul className="list-decimal list-inside ml-6 space-y-1">
+              <li>
+                <strong>Position:</strong> How many digits are in the correct
+                position.
+              </li>
+              <li>
+                <strong>Digits:</strong> How many of your guessed digits are
+                present in the code, regardless of position.
+              </li>
+            </ul>
+
+            <p className="text-lg  text-black">
+              4. You can make multiple guesses until you decipher the code or
+              the timer runs out.
+            </p>
+
+            <p className="text-lg  text-black">
+              5. If you feel stuck or run out of time, click the{" "}
+              <strong>'Give Up'</strong> button to restart the game.
+            </p>
+          </div>
+        ) : (
+          ""
         )}
 
         <Footer />
