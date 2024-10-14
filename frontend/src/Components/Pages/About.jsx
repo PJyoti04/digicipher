@@ -29,8 +29,8 @@ const About = () => {
               🍀🚀
             </p>
           </div>
-          <div className="h-[42%] w-[100%] flex gap-4 flex-col items-center">
-            <div className="h-[50%] w-[95%] flex justify-between border-2 border-white p-2">
+          <div className="h-[50%] w-[100%] flex gap-4 flex-col items-center">
+            <div className="h-[50%] w-[95%] flex justify-between border-2 border-white rounded-2xl p-2">
               <div className="h-full w-[30%] flex flex-col items-center justify-around">
                 <img
                   src="DP.jpg"
@@ -40,7 +40,7 @@ const About = () => {
                 />
                 <p className="uppercase font-bold text-white">Kironmay</p>
               </div>
-              <div className="h-full w-[70%]  px-2 flex flex-col gap-4">
+              <div className="h-full w-[70%] px-2 flex flex-col gap-4 mt-4">
                 <p className="text-sm text-white">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Veniam amet id animi?
@@ -52,7 +52,7 @@ const About = () => {
                 </div>
               </div>
             </div>
-            <div className="h-[50%] w-[95%] flex justify-between border-2 border-white p-2">
+            <div className="h-[50%] w-[95%] flex justify-between border-2 rounded-2xl border-white p-2">
               <div className="h-full w-[30%] flex flex-col items-center justify-around">
                 <img
                   src="DP.jpg"
@@ -62,7 +62,7 @@ const About = () => {
                 />
                 <p className="uppercase font-bold text-white">Kironmay</p>
               </div>
-              <div className="h-full w-[70%]  px-2 flex flex-col gap-4">
+              <div className="h-full w-[70%]  px-2 flex flex-col gap-4 mt-4">
                 <p className="text-sm text-white">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Veniam amet id animi?
