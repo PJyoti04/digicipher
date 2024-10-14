@@ -1,16 +1,16 @@
-import React from 'react'
-import { Avatar, AvatarBadge, AvatarGroup ,WrapItem,Wrap} from '@chakra-ui/react'
+import React from "react";
+import { Avatar, WrapItem, Wrap } from "@chakra-ui/react";
 
-const User = () => {
+const User = ({ size = "sm" }) => {
   return (
     <div>
-        <Wrap>
-            <WrapItem>
-                <Avatar size='sm'  name='' src='' />
-            </WrapItem>
-        </ Wrap>
+      <Wrap>
+        <WrapItem>
+          <Avatar size={size} name="" src="" />
+        </WrapItem>
+      </Wrap>
     </div>
-  )
-}
+  );
+};
 
-export default User
+export default User;
