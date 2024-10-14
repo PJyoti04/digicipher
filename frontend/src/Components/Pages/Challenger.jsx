@@ -220,7 +220,9 @@ const Challenger = () => {
 
   const handleGiveUp = () => {
     setResult(true);
-    setWin(2)
+    setWin(2);
+    setIsDisabled(true)
+    setIsPaused(true)
   }
 
   const handleExpire = () => {
@@ -332,8 +334,9 @@ const Challenger = () => {
                   Enter
                 </button>
                 <button className="text-white bg-red-400 h-max w-[70%] px-2 py-1 uppercase text-xl font-bold rounded-lg"
-                onClick={handleGiveUp}>
-                  Give Up
+                onClick={win === 2 ? resetGame : handleGiveUp}
+                >
+                  {win === 2 ? "Play Again" : "Give Up"}
                 </button>
               </div>
             </>

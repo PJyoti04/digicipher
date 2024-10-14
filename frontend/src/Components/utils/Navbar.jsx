@@ -80,7 +80,9 @@ const Navbar = ({ showNav, back }) => {
             >
               DIGICIPHER
             </div>
+            <div onClick={handleUserClick} >
             <User size={"sm"} />
+            </div>
           </div>
         )}
       </div>
