@@ -9,7 +9,6 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 const About = () => {
-
   const abtref = useRef([]);
 
   useGSAP(() => {
@@ -20,13 +19,15 @@ const About = () => {
       gsap.from(abtref.current[0], {
         x: -100,
         opacity: 0,
-        duration: 0.8,ease: "sine.inOut",
+        duration: 0.8,
+        ease: "sine.inOut",
       })
     ).add(
       gsap.from(abtref.current[2], {
         x: -100,
         opacity: 0,
-        duration: 0.8,ease: "sine.inOut",
+        duration: 0.8,
+        ease: "sine.inOut",
       }),
       "<"
     ); // "<" ensures both animations happen at the same time
@@ -36,14 +37,16 @@ const About = () => {
       gsap.from(abtref.current[1], {
         x: 100,
         opacity: 0,
-        duration: 0.8,ease: "sine.inOut",
+        duration: 0.8,
+        ease: "sine.inOut",
       })
     )
       .add(
         gsap.from(abtref.current[3], {
           x: 100,
           opacity: 0,
-          duration: 0.8,ease: "sine.inOut",
+          duration: 0.8,
+          ease: "sine.inOut",
         }),
         "<"
       ) // "<" ensures this animation happens at the same time as 1
@@ -51,7 +54,8 @@ const About = () => {
         gsap.from(abtref.current[4], {
           x: 100,
           opacity: 0,
-          duration: 0.8,ease: "sine.inOut",
+          duration: 0.8,
+          ease: "sine.inOut",
         }),
         "<"
       ); // "<" ensures this animation happens at the same time as 1 and 3
@@ -64,8 +68,8 @@ const About = () => {
     >
       <div className="h-full w-full bg-opacity-20 backdrop-blur-sm flex flex-col items-center gap-8">
         <Navbar back={true}></Navbar>
-        <div className="h-[80vh] w-full flex flex-col items-center">
-          <div className="h-[45%] w-[95%] flex items-center flex-col">
+        <div className="w-full flex flex-col overflow-auto items-center">
+          <div className="h-max w-[95%] flex items-center flex-col">
             <h1
               ref={(el) => {
                 abtref.current[0] = el;
@@ -90,7 +94,7 @@ const About = () => {
               🍀🚀
             </p>
           </div>
-          <div className="h-[50%] w-[100%] flex gap-4 flex-col items-center">
+          <div className="h-max w-[100%] flex gap-4 flex-col items-center">
             <div
               ref={(el) => {
                 abtref.current[2] = el;
@@ -183,6 +187,20 @@ const About = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="text-white w-full p-2 flex flex-col">
+            <div className="w-full text-2xl text-left border-b-2 border-white">
+              Want To Contribute!
+            </div>
+            <p>
+              DigiCipher is an exciting open-source puzzle game where players
+              must crack a secret 4-digit code before the timer runs out.
+              Combining logic, quick thinking, and real-time hints, the game
+              offers an engaging challenge for puzzle lovers of all skill
+              levels. This project is actively maintained and welcomes
+              contributions from developers who are passionate about web
+              development, animations, and game logic
+            </p>
           </div>
         </div>
         <Footer></Footer>
