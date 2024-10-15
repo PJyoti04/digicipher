@@ -86,7 +86,7 @@ const Navbar = ({ showNav, back }) => {
         )}
       </div>
 
-      <div>{user && <Login setUser={setUser} />}</div>
+      <div className="">{user && <Login setUser={setUser} />}</div>
 
       {showModal && (
         <ReturnModal
