@@ -12,9 +12,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap" rel="stylesheet">
   <style>
-    body, html {
+    body,
+    html {
       height: 100%;
       width: 100%;
       margin: 0;
@@ -25,7 +27,7 @@
       background-color: #282c34;
       color: white;
     }
-    
+
     .fullscreen-overlay {
       display: flex;
       flex-direction: column;
@@ -60,7 +62,9 @@
 
 <body>
   <div class="fullscreen-overlay" id="fullscreen-overlay">
-    <h1><span style="color: transparent;background-image: linear-gradient(to right,blue,white,red);background-clip: text;">Welcome to Digicipher</span></h1>
+    <h1><span
+        style="color: transparent;background-image: linear-gradient(to right,blue,white,red);background-clip: text;">Welcome
+        to Digicipher</span></h1>
     <p>Tap To Continue</p>
   </div>
 
@@ -83,10 +87,10 @@
 
     // Function to start the app and go fullscreen
     function startApp() {
-      openFullscreen(); 
+      // openFullscreen(); 
       document.getElementById('fullscreen-overlay').style.display = 'none'; // Hide the overlay
       document.getElementById('root').style.display = 'block'; // Show the app content
-      
+
       // Dynamically load the React app after user interaction
       import('/src/main.jsx')
         .then((module) => {
