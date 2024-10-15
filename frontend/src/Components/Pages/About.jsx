@@ -4,6 +4,7 @@ import Footer from "../utils/Footer";
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { SiGmail } from "react-icons/si";
+import { Link } from "react-router-dom";
 
 const About = () => {
   return (
@@ -38,27 +39,28 @@ const About = () => {
                   srcset=""
                   className="h-[68px] w-[68px] rounded-full object-cover"
                 />
-                <p className="uppercase font-bold text-white">
-                  Kironmay Mishra
+                <p className="uppercase font-bold text-center text-white">
+                  Kiron
                 </p>
               </div>
               <div className="h-full w-[70%] px-2 flex flex-col gap-4 mt-">
                 <div className="h-[80%] overflow-auto">
                   <p className="text-sm text-white">
-                    I'm Kironmay Mishra, a 3rd-year undergraduate student at
-                    Silicon University with hands-on experience in web
-                    development, specializing in the MERN stack, React, Redux,
-                    and Tailwind CSS. I have developed multiple projects that
-                    showcase my ability to build scalable, user-friendly
-                    applications. In addition, I am expanding my expertise by
-                    diving into DevOps, aiming to enhance my skills in
-                    automation and cloud infrastructure.
+                    3rd-Year undergrad student @Silicon University skilled in
+                    MERN stack and DevOps, specializes in building scalable,
+                    user-friendly web applications.
                   </p>
                 </div>
                 <div className="flex gap-4">
-                  <FaGithub size={"22px"} color="white" />
-                  <FaLinkedinIn size={"22px"} color="white" />
-                  <SiGmail size={"22px"} color="white" />
+                  <Link to={"https://github.com/KC1064"} target="_blank">
+                    <FaGithub size={"22px"} color="white" />
+                  </Link>
+                  <Link to={"https://www.linkedin.com/in/kironmay-mishra-a32b791b4/"} target="_blank">
+                    <FaLinkedinIn size={"22px"} color="white" />
+                  </Link>
+                  <Link target="_blank" to={"mailto:kiron08072003@gmail.com"}>
+                    <SiGmail size={"22px"} color="white" />
+                  </Link>
                 </div>
               </div>
             </div>
@@ -70,21 +72,15 @@ const About = () => {
                   srcset=""
                   className="h-[68px] w-[68px] rounded-full object-cover"
                 />
-                <p className="uppercase font-bold text-white">
-                  Jyoti Ranjan Pahi
+                <p className="uppercase font-bold text-center text-white">
+                  Jyoti
                 </p>
               </div>
               <div className="h-full w-[70%]  px-2 flex flex-col gap-4 mt-">
                 <p className="text-sm text-white h-[80%] overflow-auto">
-                  I am a third-year Computer Science student passionate about
-                  software development, problem-solving, and emerging
-                  technologies. With a strong foundation in programming
-                  languages such as Python, Java, and C. I enjoy building
-                  applications and working on real-world projects that blend
-                  creativity and technology. I have hands-on experience in web
-                  development, algorithms, and data structures, and I’m actively
-                  enhancing my skills in areas like machine learning and cloud
-                  computing.
+                  3rd Year Undergrad student @Silicon University, skilled in
+                  Python, Java, and C, passionate about software development,
+                  machine learning, and cloud computing.
                 </p>
                 <div className="flex gap-4">
                   <FaGithub size={"22px"} color="white" />
