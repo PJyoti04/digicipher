@@ -52,9 +52,11 @@ const App = () => {
   }
 
   return (
-    <ChakraProvider>
-      <RouterProvider router={appRouter} />{" "}
-    </ChakraProvider>
+    <div className="overflow-hidden">
+      <ChakraProvider>
+        <RouterProvider router={appRouter} />{" "}
+      </ChakraProvider>
+    </div>
   ); // Render RouterProvider after loading
 };
 

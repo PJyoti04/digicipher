@@ -16,7 +16,7 @@ const Footer = () => {
     });
   });
   return (
-    <div className="h-[9vh] w-full flex justify-center items-center">
+    <div className="h-max pb-2 w-full flex justify-center items-center">
       <div
         ref={ref1}
         className="flex justify-between w-[100%] h-[100%] bg-opacity-15 rounded-tr-3xl rounded-tl-3xl px-4"

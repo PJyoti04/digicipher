@@ -1,24 +1,89 @@
-import React from "react";
+import React, { useRef } from "react";
 import Navbar from "../utils/Navbar";
 import Footer from "../utils/Footer";
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { SiGmail } from "react-icons/si";
+import { Link } from "react-router-dom";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 
 const About = () => {
+  const abtref = useRef([]);
+
+  useGSAP(() => {
+    const tl = gsap.timeline();
+
+    // Animate elements 0 and 2 simultaneously
+    tl.add(
+      gsap.from(abtref.current[0], {
+        x: -100,
+        opacity: 0,
+        duration: 0.8,
+        ease: "sine.inOut",
+      })
+    ).add(
+      gsap.from(abtref.current[2], {
+        x: -100,
+        opacity: 0,
+        duration: 0.8,
+        ease: "sine.inOut",
+      }),
+      "<"
+    ); // "<" ensures both animations happen at the same time
+
+    // Animate elements 1, 3, and 4 simultaneously after 0 and 2
+    tl.add(
+      gsap.from(abtref.current[1], {
+        x: 100,
+        opacity: 0,
+        duration: 0.8,
+        ease: "sine.inOut",
+      })
+    )
+      .add(
+        gsap.from(abtref.current[3], {
+          x: 100,
+          opacity: 0,
+          duration: 0.8,
+          ease: "sine.inOut",
+        }),
+        "<"
+      ) // "<" ensures this animation happens at the same time as 1
+      .add(
+        gsap.from(abtref.current[4], {
+          x: 100,
+          opacity: 0,
+          duration: 0.8,
+          ease: "sine.inOut",
+        }),
+        "<"
+      ); // "<" ensures this animation happens at the same time as 1 and 3
+  });
+
   return (
     <div
-      className="h-[100vh] w-[100vw] flex gap-5 flex-col items-center bg-black"
+      className="overflow-hidden h-[100vh] w-[100vw] flex gap-5 flex-col items-center bg-black"
       style={{ backgroundImage: "url('./bg.svg')", backgroundSize: "cover" }}
     >
       <div className="h-full w-full bg-opacity-20 backdrop-blur-sm flex flex-col items-center gap-8">
         <Navbar back={true}></Navbar>
-        <div className="h-[80vh] w-full flex flex-col items-center">
-          <div className="h-[45%] w-[95%] flex items-center flex-col">
-            <h1 className="text-white border-b-2 h-max text-2xl w-[100%]">
+        <div className="w-full flex flex-col overflow-auto items-center">
+          <div className="h-max w-[95%] flex items-center flex-col">
+            <h1
+              ref={(el) => {
+                abtref.current[0] = el;
+              }}
+              className="text-white border-b-2 h-max text-2xl w-[100%]"
+            >
               About
             </h1>
-            <p className="text-white">
+            <p
+              ref={(el) => {
+                abtref.current[1] = el;
+              }}
+              className="text-white"
+            >
               Welcome to <strong>DigiCipher</strong>! 🔍✨ Get ready for an
               exciting puzzle adventure, where every guess brings you closer to
               cracking the secret 4-digit code. Use logic🧩,sharp thinking💡,
@@ -29,8 +94,21 @@ const About = () => {
               🍀🚀
             </p>
           </div>
-          <div className="h-[50%] w-[100%] flex gap-4 flex-col items-center">
-            <div className="h-[50%] w-[95%] flex justify-between border-2 border-white rounded-2xl p-2 bg-white bg-opacity-15">
+          <div className="h-max w-[100%] flex gap-4 flex-col items-center">
+            <div
+              ref={(el) => {
+                abtref.current[2] = el;
+              }}
+              className="text-white w-[95%] border-white border-b-2 text-2xl"
+            >
+              About Developers
+            </div>
+            <div
+              ref={(el) => {
+                abtref.current[3] = el;
+              }}
+              className="h-[50%] w-[95%] flex justify-between border-2 border-white rounded-2xl p-2 bg-white bg-opacity-15"
+            >
               <div className="h-full w-[30%] flex flex-col items-center justify-around">
                 <img
                   src="DP.jpg"
@@ -38,31 +116,42 @@ const About = () => {
                   srcset=""
                   className="h-[68px] w-[68px] rounded-full object-cover"
                 />
-                <p className="uppercase font-bold text-white">
-                  Kironmay Mishra
+                <p className="uppercase font-bold text-center text-white">
+                  Kiron
                 </p>
               </div>
               <div className="h-full w-[70%] px-2 flex flex-col gap-4 mt-">
                 <div className="h-[80%] overflow-auto">
                   <p className="text-sm text-white">
-                    I'm Kironmay Mishra, a 3rd-year undergraduate student at
-                    Silicon University with hands-on experience in web
-                    development, specializing in the MERN stack, React, Redux,
-                    and Tailwind CSS. I have developed multiple projects that
-                    showcase my ability to build scalable, user-friendly
-                    applications. In addition, I am expanding my expertise by
-                    diving into DevOps, aiming to enhance my skills in
-                    automation and cloud infrastructure.
+                    3rd-Year undergrad student @Silicon University skilled in
+                    MERN stack and DevOps, specializes in building scalable,
+                    user-friendly web applications.
                   </p>
                 </div>
                 <div className="flex gap-4">
-                  <FaGithub size={"22px"} color="white" />
-                  <FaLinkedinIn size={"22px"} color="white" />
-                  <SiGmail size={"22px"} color="white" />
+                  <Link to={"https://github.com/KC1064"} target="_blank">
+                    <FaGithub size={"22px"} color="white" />
+                  </Link>
+                  <Link
+                    to={
+                      "https://www.linkedin.com/in/kironmay-mishra-a32b791b4/"
+                    }
+                    target="_blank"
+                  >
+                    <FaLinkedinIn size={"22px"} color="white" />
+                  </Link>
+                  <Link target="_blank" to={"mailto:kiron08072003@gmail.com"}>
+                    <SiGmail size={"22px"} color="white" />
+                  </Link>
                 </div>
               </div>
             </div>
-            <div className="h-[50%] w-[95%] flex justify-between border-2 rounded-2xl border-white p-2 bg-white bg-opacity-15">
+            <div
+              ref={(el) => {
+                abtref.current[4] = el;
+              }}
+              className="h-[50%] w-[95%] flex justify-between border-2 rounded-2xl border-white p-2 bg-white bg-opacity-15"
+            >
               <div className="h-full w-[30%] flex flex-col items-center justify-around">
                 <img
                   src="Dpj.jpeg"
@@ -70,29 +159,48 @@ const About = () => {
                   srcset=""
                   className="h-[68px] w-[68px] rounded-full object-cover"
                 />
-                <p className="uppercase font-bold text-white">
-                  Jyoti Ranjan Pahi
+                <p className="uppercase font-bold text-center text-white">
+                  Jyoti
                 </p>
               </div>
               <div className="h-full w-[70%]  px-2 flex flex-col gap-4 mt-">
                 <p className="text-sm text-white h-[80%] overflow-auto">
-                  I am a third-year Computer Science student passionate about
-                  software development, problem-solving, and emerging
-                  technologies. With a strong foundation in programming
-                  languages such as Python, Java, and C. I enjoy building
-                  applications and working on real-world projects that blend
-                  creativity and technology. I have hands-on experience in web
-                  development, algorithms, and data structures, and I’m actively
-                  enhancing my skills in areas like machine learning and cloud
-                  computing.
+                  3rd Year Undergrad student @Silicon University, skilled in
+                  Python, Java, and C, passionate about software development,
+                  machine learning, and cloud computing.
                 </p>
                 <div className="flex gap-4">
-                  <FaGithub size={"22px"} color="white" />
-                  <FaLinkedinIn size={"22px"} color="white" />
-                  <SiGmail size={"22px"} color="white" />
+                  <Link to={"https://github.com/PJyoti04"} target="_blank">
+                    <FaGithub size={"22px"} color="white" />
+                  </Link>
+                  <Link
+                    to={
+                      "https://www.linkedin.com/in/jyoti-ranjan-pahi-0242a9331/"
+                    }
+                    target="_blank"
+                  >
+                    <FaLinkedinIn size={"22px"} color="white" />
+                  </Link>
+                  <Link target="_blank" to={"mailto:bapunjyoti2004@gmail.com"}>
+                    <SiGmail size={"22px"} color="white" />
+                  </Link>
                 </div>
               </div>
             </div>
+          </div>
+          <div className="text-white w-full p-2 flex flex-col">
+            <div className="w-full text-2xl text-left border-b-2 border-white">
+              Want To Contribute!
+            </div>
+            <p>
+              DigiCipher is an exciting open-source puzzle game where players
+              must crack a secret 4-digit code before the timer runs out.
+              Combining logic, quick thinking, and real-time hints, the game
+              offers an engaging challenge for puzzle lovers of all skill
+              levels. This project is actively maintained and welcomes
+              contributions from developers who are passionate about web
+              development, animations, and game logic
+            </p>
           </div>
         </div>
         <Footer></Footer>

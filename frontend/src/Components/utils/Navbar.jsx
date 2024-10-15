@@ -16,7 +16,6 @@ const Navbar = ({ showNav, back }) => {
   const [user, setUser] = useState(false);
   const nav = useNavigate();
 
-
   const handleUserClick = () => {
     setUser(true);
   };
@@ -80,14 +79,14 @@ const Navbar = ({ showNav, back }) => {
             >
               DIGICIPHER
             </div>
-            <div onClick={handleUserClick} >
-            <User size={"sm"} />
+            <div onClick={handleUserClick}>
+              <User size={"sm"} />
             </div>
           </div>
         )}
       </div>
 
-      {user && <Login setUser={setUser} />}
+      <div className="">{user && <Login setUser={setUser} />}</div>
 
       {showModal && (
         <ReturnModal

@@ -37,7 +37,7 @@ const Login = ({ setUser }) => {
       {/* Login Modal */}
       <div
         ref={loginRef} // Attach the ref to this container
-        className="bg-white h-[100vh] w-[70%] absolute top-0 right-0 z-30"
+        className="bg-white h-20 w-[70%] absolute top-10 right-6 flex items-center z-30"
       >
         <div className="absolute top-4 right-4" onClick={handleClose}>
           <MdOutlineCancel size={"34px"} />
@@ -45,11 +45,6 @@ const Login = ({ setUser }) => {
         <div className="p-2 flex items-center gap-2 mt-6">
           <User size="md" />
           <p className="text-2xl">UserName</p>
-        </div>
-        <div className="flex mt-4 px-4 flex-col gap-6">
-          <p>Something</p>
-          <p>Something</p>
-          <p>Something</p>
         </div>
       </div>
     </div>
