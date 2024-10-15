@@ -202,7 +202,7 @@ const Challenger = () => {
         digits.push(randomDigit);
       }
     }
-    console.log(digits.join(""));
+    // console.log(digits.join(""));
 
     return digits.join("");
   };
@@ -358,9 +358,9 @@ const Challenger = () => {
         {showInstructions ? (
           <div
           ref={ins}
-            style={{ fontFamily: "Inter, sans-serif",overflow:"scroll" }}
+            style={{ fontFamily: "Inter, sans-serif",overflow:"hidden" }}
             // className="absolute top-[20%] bg-opacity-90 right-0 z-50 h-max py-2 w-[90%] bg-white px-2"
-            className="absolute z-50 top-[15%] bg-opacity-100 flex-col bg-white h-[70%] py-2 w-[95%] px-3 backdrop-blur-xl"
+            className="absolute z-50 top-[15%] bg-opacity-100 flex-col bg-white h-[max] py-2 w-[95%] px-3 backdrop-blur-xl rounded-lg shadow-2xl"
           >
             <MdOutlineCancel
                 ref={cross}

@@ -46,7 +46,7 @@ const Rules = () => {
                   style={{ fontFamily: "pixel" }}
                   className="text-2xl text-emerald-300 py-1"
                 >
-                  Objectives :
+                  Objective :
                 </h1>
                 <p className="font-Agdasima text-lg py-1">
                   The main goal is to guess the correct 4-digit number within

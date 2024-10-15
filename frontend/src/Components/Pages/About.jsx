@@ -66,17 +66,18 @@ const About = () => {
       className="overflow-hidden h-[100vh] w-[100vw] flex gap-5 flex-col items-center bg-black"
       style={{ backgroundImage: "url('./bg.svg')", backgroundSize: "cover" }}
     >
-      <div className="h-full w-full bg-opacity-20 backdrop-blur-sm flex flex-col items-center gap-8">
+      <div className="h-full w-full bg-opacity-20 backdrop-blur-sm flex flex-col items-center gap-5">
         <Navbar back={true}></Navbar>
-        <div className="w-full flex flex-col overflow-auto items-center">
+        <div className="w-full flex flex-col overflow-auto items-center gap-8">
           <div className="h-max w-[95%] flex items-center flex-col">
             <h1
               ref={(el) => {
                 abtref.current[0] = el;
               }}
-              className="text-white border-b-2 h-max text-2xl w-[100%]"
+              style={{ fontFamily: "pixel" }}
+              className="text-emerald-300  border-b-2 h-max text-2xl w-[100%]"
             >
-              About
+              About Game
             </h1>
             <p
               ref={(el) => {
@@ -99,7 +100,8 @@ const About = () => {
               ref={(el) => {
                 abtref.current[2] = el;
               }}
-              className="text-white w-[95%] border-white border-b-2 text-2xl"
+              style={{ fontFamily: "pixel" }}
+              className="text-emerald-300 w-[95%] border-white border-b-2 text-2xl"
             >
               About Developers
             </div>
@@ -189,7 +191,10 @@ const About = () => {
             </div>
           </div>
           <div className="text-white w-full p-2 flex flex-col">
-            <div className="w-full text-2xl text-left border-b-2 border-white">
+            <div
+              style={{ fontFamily: "pixel" }}
+              className="w-full text-2xl text-left border-b-2 border-white text-emerald-300"
+            >
               Want To Contribute!
             </div>
             <p>
@@ -199,7 +204,7 @@ const About = () => {
               offers an engaging challenge for puzzle lovers of all skill
               levels. This project is actively maintained and welcomes
               contributions from developers who are passionate about web
-              development, animations, and game logic
+              development, animations, and game logic.Click on the Github icon on the Home Page to Open the Repo.
             </p>
           </div>
         </div>
