@@ -168,7 +168,7 @@ const About = () => {
               <div className="h-full w-[70%]  px-2 flex flex-col gap-4 mt-">
                 <p className="text-sm text-white h-[80%] overflow-auto">
                   3rd Year Undergrad student @Silicon University, skilled in
-                  Python, Java, and C, passionate about software development,
+                  Python, Java, C and MERN Stack, passionate about software development,
                   machine learning, and cloud computing.
                 </p>
                 <div className="flex gap-4">
