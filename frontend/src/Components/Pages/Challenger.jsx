@@ -24,7 +24,7 @@ import { motion } from "framer-motion";
 
 const Challenger = () => {
   const [start, setStart] = useState(true);
-  const [win, setWin] = useState(1);
+  const [win, setWin] = useState(4);
   const [result, setResult] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -195,7 +195,7 @@ const Challenger = () => {
         digits.push(randomDigit);
       }
     }
-    // console.log(digits.join(""));
+    console.log(digits.join(""));
 
     return digits.join("");
   };
@@ -332,9 +332,9 @@ const Challenger = () => {
                 </button>
                 <button
                   className="text-white bg-red-400 h-max w-[70%] px-2 py-1 uppercase text-xl font-bold rounded-lg"
-                  onClick={win === 2 ? resetGame : handleGiveUp}
+                  onClick={win === 2 || win === 1 || win === 0 || win === 3 ? resetGame : handleGiveUp}
                 >
-                  {win === 2 ? "Play Again" : "Give Up"}
+                  {win === 2 || win === 1 || win === 0 || win === 3 ? "Play Again" : "Give Up"}
                 </button>
               </div>
             </>
