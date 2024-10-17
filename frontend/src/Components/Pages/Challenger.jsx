@@ -20,6 +20,7 @@ import Timer from "../utils/Timer";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { MdOutlineCancel } from "react-icons/md";
+import { motion } from "framer-motion";
 
 const Challenger = () => {
   const [start, setStart] = useState(true);
@@ -41,15 +42,7 @@ const Challenger = () => {
   const ins = useRef();
   const cross = useRef();
 
-  useGSAP(() => {
-    gsap.from(ins.current, {
-      scaleX: 0,
-      scaleY: 0,
-      duration: 0.5,
-      ease: "back.out(1)",
-    });
-  }, [showInstructions]);
-
+  
   const animateCross = () => {
     gsap.to(ins.current, {
       scaleX: 0,
@@ -58,7 +51,7 @@ const Challenger = () => {
       ease: "back.in(1)",
       onComplete: () => setShowinstructions(false),
     });
-  };
+  }
 
   const expiryTimestamp = new Date();
   expiryTimestamp.setSeconds(expiryTimestamp.getSeconds() + 600);
@@ -123,7 +116,7 @@ const Challenger = () => {
         setResult(true);
         setWin(0);
         setIsPaused(true);
-        setIsDisabled(true)
+        setIsDisabled(true);
       }
 
       setGuess((prevGuesses) => [
@@ -221,15 +214,15 @@ const Challenger = () => {
   const handleGiveUp = () => {
     setResult(true);
     setWin(2);
-    setIsDisabled(true)
-    setIsPaused(true)
-  }
+    setIsDisabled(true);
+    setIsPaused(true);
+  };
 
   const handleExpire = () => {
     setResult(true);
-    setWin(1)
+    setWin(1);
     setIsDisabled(true); // Disable input if time expires
-    setIsPaused(true);   // Pause timer or game when expired
+    setIsPaused(true); // Pause timer or game when expired
   };
 
   return (
@@ -241,9 +234,12 @@ const Challenger = () => {
         <Navbar />
         <div className="h-[84vh] w-full px-4 flex flex-col gap-5">
           {start ? (
-            <Countdown setStart={setStart}  onPress={() => {
-              setShowinstructions(true)
-            }} />
+            <Countdown
+              setStart={setStart}
+              onPress={() => {
+                setShowinstructions(true);
+              }}
+            />
           ) : (
             <>
               <div className="h-[6vh] w-[100%] flex justify-between items-center text-white px-3">
@@ -251,8 +247,13 @@ const Challenger = () => {
                   ref={timer}
                   className="px-4 py-1 text-lg font-bold rounded-lg bg-slate-400"
                 >
-                  <Timer expiryTimestamp={expiryTimestamp} isPaused={isPaused}
-                  onExpire={() => {handleExpire()}} />
+                  <Timer
+                    expiryTimestamp={expiryTimestamp}
+                    isPaused={isPaused}
+                    onExpire={() => {
+                      handleExpire();
+                    }}
+                  />
                 </h1>
                 <h1
                   onClick={() => setShowinstructions(true)}
@@ -323,18 +324,15 @@ const Challenger = () => {
               >
                 <button
                   className={`text-white bg-green-600 h-max w-[70%] px-2 py-1 uppercase text-xl font-bold rounded-lg 
-                  ${
-                      pinValue.length !== 4
-                        ? "bg-gray-400"
-                        : "bg-blue-500"
-                    }`}
+                  ${pinValue.length !== 4 ? "bg-gray-400" : "bg-blue-500"}`}
                   onClick={handleGuessSubmit}
                   disabled={pinValue.length !== 4}
                 >
                   Enter
                 </button>
-                <button className="text-white bg-red-400 h-max w-[70%] px-2 py-1 uppercase text-xl font-bold rounded-lg"
-                onClick={win === 2 ? resetGame : handleGiveUp}
+                <button
+                  className="text-white bg-red-400 h-max w-[70%] px-2 py-1 uppercase text-xl font-bold rounded-lg"
+                  onClick={win === 2 ? resetGame : handleGiveUp}
                 >
                   {win === 2 ? "Play Again" : "Give Up"}
                 </button>
@@ -356,17 +354,24 @@ const Challenger = () => {
           />
         )}
         {showInstructions ? (
-          <div
-          ref={ins}
-            style={{ fontFamily: "Inter, sans-serif",overflow:"hidden" }}
+          <motion.div
+            initial={{ scale: 0, opacity: 1, y: -1000 }}
+            animate={{ y: 0, scale: 1 }}
+            transition={{
+              type: "spring",
+              stiffness: 100,
+              damping: 20,
+            }}
+            ref={ins}
+            style={{ fontFamily: "Inter, sans-serif", overflow: "hidden" }}
             // className="absolute top-[20%] bg-opacity-90 right-0 z-50 h-max py-2 w-[90%] bg-white px-2"
             className="absolute z-50 top-[15%] bg-opacity-100 flex-col bg-white h-[max] py-2 w-[95%] px-3 backdrop-blur-xl rounded-lg shadow-2xl"
           >
             <MdOutlineCancel
-                ref={cross}
-                className="h-[28px] w-[28px] absolute right-3 top-2 text-black cursor-pointer"
-                onClick={animateCross}
-              />
+              ref={cross}
+              className="h-[28px] w-[28px] absolute right-3 top-2 text-black cursor-pointer"
+              onClick={animateCross}
+            />
             <h1 className="font-bold font-audiowide text-2xl py-2">
               Instructions
             </h1>
@@ -388,12 +393,13 @@ const Challenger = () => {
 
             <ul className="list-decimal list-inside ml-6 space-y-1 text-sm  text-black font-orbitron font-bold py-1">
               <li>
-                <strong className="text-green-600">Position:</strong> How many digits are in the correct
-                position.
+                <strong className="text-green-600">Position:</strong> How many
+                digits are in the correct position.
               </li>
               <li>
-                <strong className="text-green-600">Digits:</strong> How many of your guessed digits are
-                present in the code, regardless of position.
+                <strong className="text-green-600">Digits:</strong> How many of
+                your guessed digits are present in the code, regardless of
+                position.
               </li>
             </ul>
 
@@ -404,9 +410,10 @@ const Challenger = () => {
 
             <p className="text-sm  text-black font-orbitron font-bold py-1">
               5. If you feel stuck or run out of time, click the{" "}
-              <strong className="text-red-600">'Give Up'</strong> button to restart the game.
+              <strong className="text-red-600">'Give Up'</strong> button to
+              restart the game.
             </p>
-          </div>
+          </motion.div>
         ) : (
           ""
         )}

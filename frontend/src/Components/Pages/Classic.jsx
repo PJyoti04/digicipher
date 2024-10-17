@@ -7,6 +7,7 @@ import ResultModal from "../utils/ResultModal";
 import ReturnModal from "../utils/ReturnModal";
 import Footer from "../utils/Footer";
 import { MdOutlineCancel } from "react-icons/md";
+import { motion } from "framer-motion";
 
 const Classic = () => {
   const [input, setInput] = useState([[], [], [], []]);
@@ -25,14 +26,14 @@ const Classic = () => {
   const ins = useRef();
   const cross = useRef();
 
-  useGSAP(() => {
-    gsap.from(ins.current, {
-      scaleX: 0,
-      scaleY: 0,
-      duration: 0.5,
-      ease: "back.out(1)",
-    });
-  }, [instructions]);
+  // useGSAP(() => {
+  //   gsap.from(ins.current, {
+  //     scaleX: 0,
+  //     scaleY: 0,
+  //     duration: 0.5,
+  //     ease: "back.out(1)",
+  //   });
+  // }, [instructions]);
 
   // Animation for page load
   useGSAP(() => {
@@ -279,7 +280,14 @@ const Classic = () => {
 
         {/* Instructions */}
         {instructions && (
-          <div
+          <motion.div
+            initial={{ scale: 0, opacity: 1, y: -1000 }}
+            animate={{ y: 0, scale: 1 }}
+            transition={{
+              type: "spring",
+              stiffness: 100,
+              damping: 20,
+            }}
             ref={ins}
             className="h-max w-[90%] absolute z-50 top-[22vh] right-6 flex flex-col gap-3 p-5 rounded-lg shadow-2xl border-2 border-black bg-white bg-opacity-100 backdrop-blur-xl"
           >
@@ -290,6 +298,7 @@ const Classic = () => {
                 onClick={animateCross}
               />
             </div>
+
             <h1 className="font-bold font-audiowide text-[23px]">
               Instructions
             </h1>
@@ -323,7 +332,7 @@ const Classic = () => {
             <p className="font-bold font-orbitron text-sm text-black">
               5. You have 4 chances to guess the correct number.
             </p>
-          </div>
+          </motion.div>
         )}
         <Footer />
       </div>
