@@ -1,11 +1,13 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MdOutlineCancel } from "react-icons/md";
 import User from "./Avatar";
 import gsap from "gsap";
+import { Link } from "react-router-dom";
 
 const Login = ({ setUser }) => {
   const loginRef = useRef(); // Reference for the login container
   const backdropRef = useRef(); // Reference for the backdrop
+  const [logged, setLogged] = useState(false);
 
   useEffect(() => {
     gsap.fromTo(
@@ -43,8 +45,13 @@ const Login = ({ setUser }) => {
           <MdOutlineCancel size={"34px"} />
         </div>
         <div className="p-2 flex items-center gap-2 mt-6">
-          <User size="md" />
-          <p className="text-2xl">UserName</p>
+          {logged ? (
+            <User size="md" />
+          ) : (
+            <Link to="/signup">
+              <button className="text-2xl">Login</button>
+            </Link>
+          )}
         </div>
       </div>
     </div>
